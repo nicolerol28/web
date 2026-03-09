@@ -1,6 +1,6 @@
 function App() {
   return (
-    <h1>Nicole</h1>
+    <h1>Nicole Roldan</h1>
   )
 }
 
