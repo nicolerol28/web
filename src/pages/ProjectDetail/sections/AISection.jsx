@@ -61,7 +61,21 @@ export default function AISection({ project }) {
         </div>
       </div>
 
-      {/* 4. CONTEXT ENGINEERING */}
+      {/* 4. INJECTION PATTERNS */}
+      <div>
+        <h2 className="docs-overview-section-title">Patrones de prompt injection</h2>
+        <p className="docs-ai-context-desc">
+          AssistantGuard bloquea mensajes que contengan cualquiera de estos {ai.injectionPatterns} patrones (case-insensitive).
+          Lanza HTTP 400 ante detección. Trade-off documentado: "DAN" como substring puede matchear dentro de palabras.
+        </p>
+        <div className="docs-ai-injection-grid">
+          {ai.injectionPatternsList?.map((pattern) => (
+            <span key={pattern} className="docs-ai-injection-tag">{pattern}</span>
+          ))}
+        </div>
+      </div>
+
+      {/* 5. CONTEXT ENGINEERING */}
       <div>
         <h2 className="docs-overview-section-title">Context engineering</h2>
         <p className="docs-ai-context-desc">

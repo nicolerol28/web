@@ -1115,6 +1115,22 @@
       font-size: 0.75rem;
     }
 
+    .docs-ai-injection-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .docs-ai-injection-tag {
+      font-family: monospace;
+      font-size: 0.8rem;
+      padding: 0.3rem 0.75rem;
+      background: var(--color-surface);
+      border: 1px solid var(--color-accent-border);
+      border-radius: var(--radius-sm);
+      color: var(--color-text-muted);
+    }
+
    @media (max-width: 768px) {
      .docs-ai-stats { grid-template-columns: repeat(2, 1fr); }
      .docs-ai-stat:nth-child(2) { border-right: none; }
