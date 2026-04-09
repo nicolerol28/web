@@ -965,6 +965,7 @@
      display: flex;
      flex-direction: column;
      max-width: 600px;
+     margin-inline: auto;
    }
 
    .docs-ai-flow-item {
@@ -1073,6 +1074,75 @@
      line-height: 1.5;
    }
 
+   .docs-ai-context-desc {
+      color: var(--color-text-muted);
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .docs-ai-queries {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem;
+    }
+
+    @media (max-width: 640px) {
+      .docs-ai-queries {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .docs-ai-query {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      background: var(--color-surface);
+      border: 1px solid var(--color-accent-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+
+    .docs-ai-query-label {
+      color: var(--color-text-muted);
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .docs-ai-query-detail {
+      color: var(--color-text-dim);
+      font-family: monospace;
+      font-size: 0.75rem;
+    }
+
+    .docs-ai-arch {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .docs-ai-arch-card {
+      background: var(--color-surface);
+      border-left: 2px solid var(--color-accent);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.25rem;
+    }
+
+    .docs-ai-arch-title {
+      display: block;
+      color: var(--color-accent-light);
+      font-weight: 500;
+      font-size: 0.9rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .docs-ai-arch-desc {
+      color: var(--color-text-muted);
+      font-size: 0.875rem;
+      line-height: 1.7;
+      margin: 0;
+    }
+
    @media (max-width: 768px) {
      .docs-ai-stats { grid-template-columns: repeat(2, 1fr); }
      .docs-ai-stat:nth-child(2) { border-right: none; }
@@ -1121,7 +1191,8 @@
    /* Roles table */
    .docs-features-table {
      width: 100%;
-     border-collapse: collapse;
+     border-collapse: separate;
+     border-spacing: 0;
      border: 1px solid var(--color-accent-border);
      border-radius: var(--radius-md);
      overflow: hidden;
@@ -1262,42 +1333,75 @@
       transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    /* Modules */
-    .docs-testing-modules {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
+    /* Modules table */
+    .docs-testing-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      border: 1px solid var(--color-accent-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
     }
 
-    .docs-testing-module {
-      display: flex;
-      flex-direction: column;
-      gap: 0.2rem;
-      padding: 0.55rem 0.9rem;
+    .docs-testing-th {
+      padding: 0.65rem 1.1rem;
+      text-align: left;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--color-text-dim);
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-accent-border);
+    }
+
+    .docs-testing-tr:not(:last-child) .docs-testing-td {
+      border-bottom: 1px solid var(--color-accent-border);
+    }
+
+    .docs-testing-td {
+      padding: 0.6rem 1.1rem;
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+      vertical-align: middle;
+      background: var(--color-bg);
+    }
+
+    .docs-testing-tr--excluded .docs-testing-td {
+      opacity: 0.45;
+    }
+
+    .docs-testing-pkg {
+      font-family: var(--font-body), monospace;
+      font-size: 0.78rem;
+      color: var(--color-text);
+    }
+
+    .docs-testing-badge {
+      display: inline-block;
+      padding: 0.15rem 0.55rem;
       border-radius: var(--radius-sm);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .docs-testing-badge--green {
       background: var(--color-accent-subtle);
       border: 1px solid var(--color-accent-border);
-    }
-
-    .docs-testing-module--highlight {
-      border-color: var(--color-accent);
-      background: rgba(37, 99, 235, 0.12);
-    }
-
-    .docs-testing-module-name {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--color-text);
-      font-family: var(--font-display);
-    }
-
-    .docs-testing-module-note {
-      font-size: 0.72rem;
       color: var(--color-accent-light);
     }
 
-    .docs-testing-module--highlight .docs-testing-module-note {
-      color: var(--color-accent-light);
+    .docs-testing-badge--accent {
+      background: var(--color-accent);
+      border: 1px solid var(--color-accent);
+      color: #fff;
+    }
+
+    .docs-testing-badge--excluded {
+      background: var(--color-surface);
+      border: 1px solid var(--color-accent-border);
+      color: var(--color-text-dim);
     }
 
     @media (max-width: 768px) {

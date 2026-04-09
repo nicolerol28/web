@@ -167,7 +167,7 @@ export default function ArchitectureSection({ project }) {
 
       {/* 2. DECISION RECORDS */}
       <div>
-        <h2 className="docs-overview-section-title">Architecture Decision Records</h2>
+        <h2 className="docs-overview-section-title">Architectural decisions</h2>
         <div className="docs-arch-adrs">
           {project.docs.adrs.map((adr, idx) => (
             <AdrCard

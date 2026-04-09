@@ -13,13 +13,25 @@ const BARS = [
 ]
 
 const MODULES = [
-  { name: "Product",               note: null,                                    highlight: false },
-  { name: "RegisterProductUseCase",note: null,                                    highlight: false },
-  { name: "UpdateProductUseCase",  note: null,                                    highlight: false },
-  { name: "Inventory",             note: null,                                    highlight: false },
-  { name: "Suppliers",             note: null,                                    highlight: false },
-  { name: "Users",                 note: "ReflectionTestUtils",                   highlight: false },
-  { name: "AssistantGuard",        note: "27 tests — 17 patrones de injection",   highlight: true  },
+  { pkg: "shared.guard",                          instr: "97%",  branches: "90%",  excluded: false },
+  { pkg: "products.domain.model",                 instr: "100%", branches: "100%", excluded: false },
+  { pkg: "users.application.usecase",             instr: "100%", branches: "100%", excluded: false },
+  { pkg: "inventory.domain.model",                instr: "100%", branches: "100%", excluded: false },
+  { pkg: "products.application.usecase.product",  instr: "100%", branches: "100%", excluded: false },
+  { pkg: "shared.exception",                      instr: "100%", branches: "n/a",  excluded: false },
+  { pkg: "users.domain.model",                    instr: "100%", branches: "100%", excluded: false },
+  { pkg: "suppliers.application.usecase",         instr: "100%", branches: "100%", excluded: false },
+  { pkg: "products.application.usecase.unit",     instr: "100%", branches: "100%", excluded: false },
+  { pkg: "inventory.application.usecase",         instr: "100%", branches: "100%", excluded: false },
+  { pkg: "warehouse.application.usecase",         instr: "100%", branches: "100%", excluded: false },
+  { pkg: "products.application.usecase.category", instr: "100%", branches: "100%", excluded: false },
+  { pkg: "suppliers.domain.model",                instr: "100%", branches: "100%", excluded: false },
+  { pkg: "warehouse.domain.model",                instr: "100%", branches: "100%", excluded: false },
+  { pkg: "users.application",                     instr: "100%", branches: "n/a",  excluded: false },
+  { pkg: "assistant.application.usecase",         instr: "100%", branches: "n/a",  excluded: false },
+  { pkg: "assistant.infrastructure",              instr: "0%",   branches: "0%",   excluded: true  },
+  { pkg: "users.infrastructure.security",         instr: "0%",   branches: "0%",   excluded: true  },
+  { pkg: "inventory.infrastructure",              instr: "0%",   branches: "0%",   excluded: true  },
 ]
 
 export default function TestingSection() {
@@ -73,19 +85,39 @@ export default function TestingSection() {
       {/* 3. MODULES */}
       <div>
         <h2 className="docs-overview-section-title">Módulos testeados</h2>
-        <div className="docs-testing-modules">
-          {MODULES.map((mod) => (
-            <div
-              key={mod.name}
-              className={`docs-testing-module${mod.highlight ? " docs-testing-module--highlight" : ""}`}
-            >
-              <span className="docs-testing-module-name">{mod.name}</span>
-              {mod.note && (
-                <span className="docs-testing-module-note">{mod.note}</span>
-              )}
-            </div>
-          ))}
-        </div>
+        <table className="docs-testing-table">
+          <thead>
+            <tr>
+              <th className="docs-testing-th">Paquete</th>
+              <th className="docs-testing-th">Instrucciones</th>
+              <th className="docs-testing-th">Branches</th>
+            </tr>
+          </thead>
+          <tbody>
+            {MODULES.map((mod) => {
+              const rowClass = `docs-testing-tr${mod.excluded ? " docs-testing-tr--excluded" : ""}`
+              const badgeClass = mod.excluded
+                ? "docs-testing-badge docs-testing-badge--excluded"
+                : "docs-testing-badge docs-testing-badge--green"
+              return (
+                <tr key={mod.pkg} className={rowClass}>
+                  <td className="docs-testing-td">
+                    <span className="docs-testing-pkg">{mod.pkg}</span>
+                    {mod.excluded && (
+                      <span className="docs-testing-badge docs-testing-badge--excluded" style={{ marginLeft: "0.5rem" }}>excluido</span>
+                    )}
+                  </td>
+                  <td className="docs-testing-td">
+                    <span className={badgeClass}>{mod.instr}</span>
+                  </td>
+                  <td className="docs-testing-td">
+                    <span className={mod.excluded ? "docs-testing-badge docs-testing-badge--excluded" : "docs-testing-badge docs-testing-badge--green"}>{mod.branches}</span>
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
       </div>
 
     </div>
