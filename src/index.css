@@ -1124,6 +1124,16 @@
       word-break: break-word;
     }
 
+    .docs-ai-section-tag {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-accent-light);
+      margin-bottom: -1.5rem;
+      opacity: 0.7;
+    }
+
     .docs-ai-injection-grid {
       display: flex;
       flex-wrap: wrap;
@@ -1139,6 +1149,76 @@
       border-radius: var(--radius-sm);
       color: var(--color-text-muted);
       word-break: break-word;
+    }
+
+    .docs-ai-insight-prompt {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      background: var(--color-surface);
+      border: 1px solid var(--color-accent-border);
+      border-radius: var(--radius-sm);
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .docs-ai-insight-prompt-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--color-text-dim);
+    }
+
+    .docs-ai-insight-prompt-code {
+      font-family: monospace;
+      font-size: 0.8rem;
+      color: var(--color-accent-light);
+      word-break: break-word;
+      white-space: pre-wrap;
+    }
+
+    .docs-ai-insight-meta {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 1px solid var(--color-accent-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+
+    .docs-ai-insight-tipos {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .docs-ai-insight-tipo {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-sm);
+    }
+
+    .docs-ai-insight-tipo--info {
+      background: rgba(37, 99, 235, 0.12);
+      border: 1px solid rgba(37, 99, 235, 0.3);
+      color: var(--color-accent-light);
+    }
+
+    .docs-ai-insight-tipo--warning {
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      color: #fcd34d;
+    }
+
+    .docs-ai-insight-tipo--critico {
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #fca5a5;
     }
 
    @media (max-width: 768px) {

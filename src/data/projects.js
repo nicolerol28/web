@@ -41,6 +41,14 @@ export const projects = [
         rateLimit: "10 req/min por IP (ventana fija de 60s)",
         cacheSeconds: 30,
         injectionPatterns: 17,
+        insights: {
+          endpoint: "POST /api/v1/assistant/chat",
+          trigger: "Al cargar el dashboard",
+          outputFormat: "JSON array — [{ tipo, mensaje }]",
+          tipos: ["info", "warning", "critico"],
+          pattern: "Generación estructurada — mismo endpoint que el chat, prompt predefinido que fuerza output JSON sin markdown ni texto extra.",
+          prompt: 'Analiza el estado actual del inventario y dame exactamente 3 insights breves y accionables. Responde ÚNICAMENTE con un JSON array, sin texto extra, sin markdown, sin backticks. Formato: [{"tipo":"info|warning|critico","mensaje":"texto breve"}]',
+        },
         tokens: {
           prompt: "3.532 – 3.591",
           response: "9 – 406",
