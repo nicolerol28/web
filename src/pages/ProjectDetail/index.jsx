@@ -1,49 +1,47 @@
-import { useParams, useNavigate, Navigate } from "react-router-dom"
+import { useState } from "react"
+import { useParams, Navigate } from "react-router-dom"
 import { projects } from "../../data/projects"
-import { GitHubIcon, ExternalIcon } from "../../components/icons/index"
+import DocsSidebar from "./components/DocsSidebar"
+import OverviewSection from "./sections/OverviewSection"
+import ArchitectureSection from "./sections/ArchitectureSection"
+import AISection from "./sections/AISection"
+import FeaturesSection from "./sections/FeaturesSection"
+import TestingSection from "./sections/TestingSection"
+import DebtSection from "./sections/DebtSection"
+import DeploySection from "./sections/DeploySection"
+
+const SECTIONS = {
+  overview:     OverviewSection,
+  architecture: ArchitectureSection,
+  ai:           AISection,
+  features:     FeaturesSection,
+  testing:      TestingSection,
+  debt:         DebtSection,
+  deploy:       DeploySection,
+}
 
 export default function ProjectDetail() {
   const { slug } = useParams()
-  const navigate = useNavigate()
-  const project = projects.find(p => p.slug === slug)
+  const [activeSection, setActiveSection] = useState("overview")
 
+  const project = projects.find((p) => p.slug === slug)
   if (!project) return <Navigate to="/" replace />
 
+  const ActiveSection = SECTIONS[activeSection] ?? OverviewSection
+
   return (
-    <div className="nr-page project-detail">
-      <button className="plink plink-gh project-detail-back" onClick={() => navigate("/")}>
-        ← Volver
-      </button>
-
-      <h1 className="nr-section-title project-detail-title">{project.title}</h1>
-
-      <div className="project-tags project-detail-tags">
-        {project.tags.map(t => (
-          <span key={t} className="project-tag">{t}</span>
-        ))}
+    <div className="docs-layout">
+      <div className="docs-layout-sidebar">
+        <DocsSidebar
+          activeSection={activeSection}
+          onNavigate={setActiveSection}
+          project={project}
+        />
       </div>
 
-      <div className="project-links project-detail-links">
-        {project.demo && (
-          <a href={project.demo} target="_blank" rel="noreferrer" className="plink plink-demo">
-            <ExternalIcon /> Demo
-          </a>
-        )}
-        {project.backend && (
-          <a href={project.backend} target="_blank" rel="noreferrer" className="plink plink-gh">
-            <GitHubIcon size={13} /> Backend
-          </a>
-        )}
-        {project.frontend && (
-          <a href={project.frontend} target="_blank" rel="noreferrer" className="plink plink-gh">
-            <GitHubIcon size={13} /> Frontend
-          </a>
-        )}
-      </div>
-
-      <div className="project-detail-wip">
-        Documentación en construcción 🚧
-      </div>
+      <main className="docs-layout-content">
+        <ActiveSection project={project} />
+      </main>
     </div>
   )
 }

@@ -21,7 +21,7 @@ export default function AboutSection() {
           />
         </div>
         <div className="about-body">
-          <h3>Curiosidad sobre mí — aquí tienes un resumen.</h3>
+          <h3>¿Curiosidad sobre mí? — aquí tienes un resumen.</h3>
           <p>
             Soy desarrolladora Full Stack con foco en Java / Spring Boot y React, 
             apasionada por construir productos digitales completos — desde el diseño 

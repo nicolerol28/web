@@ -37,32 +37,38 @@ function CvDropdown() {
   )
 }
 
-export default function Navbar({ activeSection, scrolled, onScrollTo, onOpenSidebar }) {
+export default function Navbar({ activeSection, scrolled, onScrollTo, onOpenSidebar, minimal = false }) {
   return (
     <nav className={"nr-nav" + (scrolled ? " scrolled" : "")}>
-      <div className="nr-nav-inner">
+      <div className={"nr-nav-inner" + (minimal ? " nr-nav-inner--minimal" : "")}>
         <button className="nr-logo" onClick={() => onScrollTo("#hero")}>
           &lt;<span className="accent">NR</span>/&gt;
         </button>
-        <ul className="nr-nav-links">
-          {navLinks.map(l => (
-            <li key={l.href}>
-              <button
-                className={activeSection === l.href.slice(1) ? "active" : ""}
-                onClick={() => onScrollTo(l.href)}
-              >
-                {l.label}
-              </button>
-            </li>
-          ))}
-        </ul>
+
+        {!minimal && (
+          <ul className="nr-nav-links">
+            {navLinks.map(l => (
+              <li key={l.href}>
+                <button
+                  className={activeSection === l.href.slice(1) ? "active" : ""}
+                  onClick={() => onScrollTo(l.href)}
+                >
+                  {l.label}
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+
         <div className="nr-nav-right">
           <div className="desktop">
             <CvDropdown />
           </div>
-          <button className="nr-hamburger" onClick={onOpenSidebar}>
-            <MenuIcon />
-          </button>
+          {!minimal && (
+            <button className="nr-hamburger" onClick={onOpenSidebar}>
+              <MenuIcon />
+            </button>
+          )}
         </div>
       </div>
     </nav>

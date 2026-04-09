@@ -22,18 +22,22 @@ export default function Layout({ children }) {
     }
   }
 
+  const isHome = location.pathname === "/"
+  const isProject = location.pathname.startsWith("/project/")
+
   return (
     <>
       <Navbar
-        activeSection={activeSection}
+        activeSection={isHome ? activeSection : ""}
         scrolled={scrolled}
         onScrollTo={scrollTo}
         onOpenSidebar={() => setSidebarOpen(true)}
+        minimal={isProject}
       />
       <Sidebar
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
-        activeSection={activeSection}
+        activeSection={isHome ? activeSection : ""}
         onScrollTo={scrollTo}
       />
       <main>{children}</main>
