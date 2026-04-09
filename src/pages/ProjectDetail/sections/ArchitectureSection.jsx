@@ -1,71 +1,11 @@
 import { useState } from "react"
-
-function AdrCard({ adr, isOpen, onToggle }) {
-  return (
-    <div className={`docs-arch-adr${isOpen ? " docs-arch-adr--open" : ""}`}>
-      <button className="docs-arch-adr-header" onClick={onToggle}>
-        <div className="docs-arch-adr-title-row">
-          <span className="docs-arch-adr-title">{adr.title}</span>
-          <span className="docs-arch-adr-badge">{adr.badge}</span>
-        </div>
-        <span className="docs-arch-adr-chevron">{isOpen ? "▲" : "▼"}</span>
-      </button>
-
-      {isOpen && (
-        <div className="docs-arch-adr-body">
-          <div className="docs-arch-adr-col">
-            <span className="docs-arch-adr-col-label">Contexto</span>
-            <p>{adr.context}</p>
-          </div>
-          <div className="docs-arch-adr-col">
-            <span className="docs-arch-adr-col-label">Decisión</span>
-            <p>{adr.decision}</p>
-          </div>
-          <div className="docs-arch-adr-col">
-            <span className="docs-arch-adr-col-label">Trade-offs</span>
-            <p>{adr.tradeoffs}</p>
-          </div>
-        </div>
-      )}
-    </div>
-  )
-}
-
-const INTERFACES = [
-  { label: "Controllers", y: 60 },
-  { label: "DTOs", y: 104 },
-  { label: "Mappers", y: 148 },
-  { label: "AssistantGuard", y: 192 },
-  { label: "Spring Security", y: 236 },
-]
-
-const APPLICATION = [
-  { label: "Commands", y: 60 },
-  { label: "Queries", y: 104 },
-  { label: "Use Cases", y: 148 },
-  { label: "Result objects", y: 192 },
-]
-
-const DOMAIN = [
-  { label: "Models (Entities)", y: 86 },
-  { label: "Repository (interfaces)", y: 128 },
-  { label: "Gateways (interfaces)", y: 170 },
-  { label: "Factory methods", y: 212 },
-  { label: "Business rules", y: 254 },
-]
-
-const INFRASTRUCTURE = [
-  { label: "JPA Repos", y: 60 },
-  { label: "JPA Entities", y: 104 },
-  { label: "GeminiClient", y: 148 },
-  { label: "R2Client", y: 192 },
-  { label: "Flyway", y: 236 },
-  { label: "DemoResetJob", y: 280 },
-]
+import AdrCard from "../components/AdrCard"
 
 export default function ArchitectureSection({ project }) {
   const [openAdr, setOpenAdr] = useState(null)
   const toggle = (idx) => setOpenAdr((prev) => (prev === idx ? null : idx))
+
+  const { interfaces, application, domain, infrastructure } = project.docs.architecture
 
   return (
     <div className="docs-arch">
@@ -99,7 +39,7 @@ export default function ArchitectureSection({ project }) {
             <line x1="430" y1="30" x2="430" y2="340" stroke="var(--color-accent-border)" strokeWidth="0.5" strokeDasharray="3 3"/>
 
             {/* INTERFACES */}
-            {INTERFACES.map(({ label, y }) => (
+            {interfaces.map(({ label, y }) => (
               <g key={label}>
                 <rect x="14" y={y} width="110" height="30" rx="6" fill="none" stroke="var(--color-accent-border)" strokeWidth="0.5"/>
                 <text fontSize="11" x="69" y={y + 15} textAnchor="middle" dominantBaseline="central" fill="var(--color-text-muted)" fontFamily="var(--font-body)">{label}</text>
@@ -110,7 +50,7 @@ export default function ArchitectureSection({ project }) {
             <line x1="124" y1="140" x2="148" y2="140" stroke="var(--color-text-faint)" strokeWidth="0.5" markerEnd="url(#arrow)" fill="none"/>
 
             {/* APPLICATION */}
-            {APPLICATION.map(({ label, y }) => (
+            {application.map(({ label, y }) => (
               <g key={label}>
                 <rect x="148" y={y} width="100" height="30" rx="6" fill="none" stroke="var(--color-accent-border)" strokeWidth="0.5"/>
                 <text fontSize="11" x="198" y={y + 15} textAnchor="middle" dominantBaseline="central" fill="var(--color-text-muted)" fontFamily="var(--font-body)">{label}</text>
@@ -123,7 +63,7 @@ export default function ArchitectureSection({ project }) {
             {/* DOMAIN */}
             <rect x="268" y="46" width="152" height="260" rx="10" fill="rgba(37,99,235,0.06)" stroke="rgba(37,99,235,0.25)" strokeWidth="0.5"/>
             <text fontSize="11" fontWeight="700" x="344" y="68" textAnchor="middle" dominantBaseline="central" fill="var(--color-accent-light)" fontFamily="var(--font-body)">Domain</text>
-            {DOMAIN.map(({ label, y }) => (
+            {domain.map(({ label, y }) => (
               <g key={label}>
                 <rect x="280" y={y} width="128" height="30" rx="6" fill="rgba(37,99,235,0.1)" stroke="rgba(37,99,235,0.2)" strokeWidth="0.5"/>
                 <text fontSize="11" x="344" y={y + 15} textAnchor="middle" dominantBaseline="central" fill="var(--color-accent-light)" fontFamily="var(--font-body)">{label}</text>
@@ -131,7 +71,7 @@ export default function ArchitectureSection({ project }) {
             ))}
 
             {/* INFRASTRUCTURE */}
-            {INFRASTRUCTURE.map(({ label, y }) => (
+            {infrastructure.map(({ label, y }) => (
               <g key={label}>
                 <rect x="440" y={y} width="110" height="30" rx="6" fill="none" stroke="var(--color-accent-border)" strokeWidth="0.5"/>
                 <text fontSize="11" x="495" y={y + 15} textAnchor="middle" dominantBaseline="central" fill="var(--color-text-muted)" fontFamily="var(--font-body)">{label}</text>

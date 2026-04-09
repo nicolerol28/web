@@ -1,5 +1,3 @@
-import React from 'react';
-
 import imgLogin from '../../../assets/screenshots/login.png';
 import imgDashboard from '../../../assets/screenshots/dashboard.png';
 import imgProdTable from '../../../assets/screenshots/products-table.png';
@@ -106,8 +104,8 @@ export default function OverviewSection({ project }) {
         <h2 className="docs-overview-section-title">Screenshots</h2>
 
         <div className="docs-screenshots-grid">
-          {screenshots.map((img, index) => (
-            <div key={index} className="docs-screenshot-item">
+          {screenshots.map((img) => (
+            <div key={img.alt} className="docs-screenshot-item">
               
               <p className="screenshot-caption">
                 {img.alt}

@@ -104,6 +104,36 @@ export const projects = [
           "La respuesta llega al frontend y se muestra en el chat",
         ],
       },
+      architecture: {
+        interfaces: [
+          { label: "Controllers", y: 60 },
+          { label: "DTOs", y: 104 },
+          { label: "Mappers", y: 148 },
+          { label: "AssistantGuard", y: 192 },
+          { label: "Spring Security", y: 236 },
+        ],
+        application: [
+          { label: "Commands", y: 60 },
+          { label: "Queries", y: 104 },
+          { label: "Use Cases", y: 148 },
+          { label: "Result objects", y: 192 },
+        ],
+        domain: [
+          { label: "Models (Entities)", y: 86 },
+          { label: "Repository (interfaces)", y: 128 },
+          { label: "Gateways (interfaces)", y: 170 },
+          { label: "Factory methods", y: 212 },
+          { label: "Business rules", y: 254 },
+        ],
+        infrastructure: [
+          { label: "JPA Repos", y: 60 },
+          { label: "JPA Entities", y: 104 },
+          { label: "GeminiClient", y: 148 },
+          { label: "R2Client", y: 192 },
+          { label: "Flyway", y: 236 },
+          { label: "DemoResetJob", y: 280 },
+        ],
+      },
       adrs: [
         {
           title: "Clean Architecture + CQRS",
