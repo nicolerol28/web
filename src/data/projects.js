@@ -16,7 +16,7 @@ export const projects = [
         { label: "Branches", value: "96%" },
       ],
       tags: {
-        backend: ["Java 17", "Spring Boot 3.5", "Clean Architecture", "CQRS", "JWT", "OAuth 2.0", "Flyway", "PostgreSQL"],
+        backend: ["Java 17", "Spring Boot 3.5", "Clean Architecture", "CQRS", "JWT", "OAuth 2.0", "Flyway", "PostgreSQL", "SpringDoc OpenAPI"],
         frontend: ["React 19", "Vite", "Tailwind CSS v4", "TanStack Query", "React Router", "Recharts"],
         infra: ["Docker", "Railway", "Vercel", "Cloudflare R2", "Gemini 2.5 Flash"],
       },
@@ -31,11 +31,14 @@ export const projects = [
         "Control de acceso por roles (ADMIN / OPERATOR)",
         "Reset nocturno de datos demo vía DemoResetJob",
         "Export a Excel desde el frontend con ExcelJS",
+        "Lazy loading para todas las rutas del frontend",
+        "ReAuthModal en 401 — actualización inmediata del JWT",
+        "Demo access con un click — datos pre-cargados",
       ],
       ai: {
         model: "Gemini 2.5 Flash",
         endpoint: "POST /api/v1/assistant/chat",
-        rateLimit: "10 req/min por IP",
+        rateLimit: "10 req/min por IP (ventana fija de 60s)",
         cacheSeconds: 30,
         injectionPatterns: 17,
         features: [
@@ -48,7 +51,7 @@ export const projects = [
         ],
         flow: [
           "Usuario envía mensaje al frontend",
-          "AssistantGuard verifica rate limit por IP",
+          "AssistantGuard verifica rate limit: ventana fija de 60s, máx 10 req/IP (ConcurrentHashMap + ArrayDeque)",
           "AssistantGuard detecta patrones de injection",
           "InventoryContextQueryService consulta el estado actual del inventario (cache 30s)",
           "El contexto se inyecta en el prompt junto al mensaje del usuario",
@@ -62,7 +65,7 @@ export const projects = [
           badge: "Arquitectura",
           context: "El proyecto necesitaba demostrar disciplina arquitectónica de producción, no solo CRUD funcional.",
           decision: "Capas estrictas de Clean Architecture con el dominio sin dependencias de framework. CQRS separa lecturas (directo a JPA) de escrituras (a través del dominio).",
-          tradeoffs: "Clean Architecture requiere más archivos que un enfoque tradicional. Cada capa tiene sus propias clases y mappers. El trade-off es intencional: la separación explícita hace el dominio completamente testeable sin base de datos, y demuestra disciplina arquitectónica de producción.",
+          tradeoffs: "Más boilerplate que un enfoque Spring MVC tradicional — cada capa tiene sus propias clases y mappers. Aceptable: la separación explícita hace el dominio completamente testeable sin base de datos. Las lecturas bypasean el dominio y van directo a JPA para evitar reconstrucción innecesaria de objetos en operaciones de solo lectura.",
         },
         {
           title: "Gemini 2.5 Flash como proveedor de IA",
@@ -89,7 +92,7 @@ export const projects = [
           title: "AssistantGuard personalizado vs librería",
           badge: "Seguridad",
           context: "El endpoint del asistente de IA necesitaba rate limiting y protección contra prompt injection.",
-          decision: "AssistantGuard personalizado: rate limit en memoria (10 req/min/IP), detección de injection con 17 patrones incluyendo variantes DAN.",
+          decision: "AssistantGuard personalizado: rate limit en memoria con ventana fija de 60s (ConcurrentHashMap + ArrayDeque, 10 req/IP), detección de injection con 17 patrones incluyendo variantes DAN.",
           tradeoffs: "Una librería como Spring Cloud Gateway sería más robusta. La implementación personalizada se mantiene autocontenida, demuestra conciencia de seguridad y evita overhead de infraestructura.",
         },
         {
@@ -111,7 +114,7 @@ export const projects = [
         frontend: "Vercel",
         db: "PostgreSQL en Railway",
         storage: "Cloudflare R2",
-        domain: "Cloudflare DNS → inventory.nicoleroldan.com",
+        domain: "Cloudflare DNS → nicoleroldan.com",
         costs: [
           { service: "Railway (backend + DB)", tier: "Hobby $5/mes", value: "$5" },
           { service: "Vercel (frontend)",      tier: "Free tier",    value: "$0" },

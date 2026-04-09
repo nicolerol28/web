@@ -15,8 +15,8 @@ export default function HeroSection({ onScrollTo }) {
           <p className="hero-role">Full Stack Developer · AI Integration</p>
           <p className="hero-desc">
             Desarrolladora Full Stack con experiencia en Java / Spring Boot y React.
-            Construyo sistemas completos — desde APIs con Clean Architecture hasta
-            interfaces modernas — e integro IA para agregar inteligencia real a los productos.
+            Construyo sistemas completos, desde APIs con Clean Architecture hasta
+            interfaces modernas. Integro IA para agregar inteligencia real a los productos.
           </p>
           <div className="hero-meta">
             <div className="hero-meta-row">

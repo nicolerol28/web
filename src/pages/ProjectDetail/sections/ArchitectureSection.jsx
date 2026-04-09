@@ -31,6 +31,38 @@ function AdrCard({ adr, isOpen, onToggle }) {
   )
 }
 
+const INTERFACES = [
+  { label: "Controllers", y: 60 },
+  { label: "DTOs", y: 104 },
+  { label: "Mappers", y: 148 },
+  { label: "AssistantGuard", y: 192 },
+  { label: "Spring Security", y: 236 },
+]
+
+const APPLICATION = [
+  { label: "Commands", y: 60 },
+  { label: "Queries", y: 104 },
+  { label: "Use Cases", y: 148 },
+  { label: "Result objects", y: 192 },
+]
+
+const DOMAIN = [
+  { label: "Models (Entities)", y: 86 },
+  { label: "Repository (interfaces)", y: 128 },
+  { label: "Gateways (interfaces)", y: 170 },
+  { label: "Factory methods", y: 212 },
+  { label: "Business rules", y: 254 },
+]
+
+const INFRASTRUCTURE = [
+  { label: "JPA Repos", y: 60 },
+  { label: "JPA Entities", y: 104 },
+  { label: "GeminiClient", y: 148 },
+  { label: "R2Client", y: 192 },
+  { label: "Flyway", y: 236 },
+  { label: "DemoResetJob", y: 280 },
+]
+
 export default function ArchitectureSection({ project }) {
   const [openAdr, setOpenAdr] = useState(null)
   const toggle = (idx) => setOpenAdr((prev) => (prev === idx ? null : idx))
@@ -42,115 +74,81 @@ export default function ArchitectureSection({ project }) {
       <div>
         <h2 className="docs-overview-section-title">Clean Architecture</h2>
         <div className="docs-arch-diagram">
-          <svg width="100%" viewBox="0 0 680 400" role="img">
-            <title>Clean Architecture — 4 layers</title>
-            <desc>Four-layer Clean Architecture from outside to inside: Infrastructure, API, Application, Domain. Arrows point inward.</desc>
+          <svg width="100%" viewBox="0 0 680 380" role="img">
+            <title>Clean Architecture — Inventory System</title>
+            <desc>
+              Four columns: Interfaces, Application, Domain, Infrastructure.
+              Interfaces and Application point inward to Domain.
+              Infrastructure implements Domain interfaces (dependency inversion).
+            </desc>
             <defs>
               <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
                 <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </marker>
             </defs>
 
-            {/* Infrastructure layer (outermost) */}
-            <rect x="10" y="10" width="660" height="368" rx="14" fill="none" stroke="var(--color-accent-border)" strokeWidth="0.5" strokeDasharray="4 3"/>
-            <text x="22" y="28" style={{fontSize:"10px",fill:"var(--color-text-dim)",fontFamily:"var(--font-body)",textTransform:"uppercase",letterSpacing:"0.08em"}}>Infrastructure layer</text>
+            {/* Column labels */}
+            <text fontSize="10" x="69" y="22" textAnchor="middle" fill="var(--color-text-dim)" fontFamily="var(--font-body)" textTransform="uppercase" letterSpacing="0.08em">Interfaces</text>
+            <text fontSize="10" x="198" y="22" textAnchor="middle" fill="var(--color-text-dim)" fontFamily="var(--font-body)" textTransform="uppercase" letterSpacing="0.08em">Application</text>
+            <text fontSize="10" x="344" y="22" textAnchor="middle" fill="var(--color-accent-light)" fontFamily="var(--font-body)" textTransform="uppercase" letterSpacing="0.08em">Domain</text>
+            <text fontSize="10" x="495" y="22" textAnchor="middle" fill="var(--color-text-dim)" fontFamily="var(--font-body)" textTransform="uppercase" letterSpacing="0.08em">Infrastructure</text>
 
-            {/* API layer */}
-            <rect x="90" y="44" width="500" height="294" rx="10" fill="none" stroke="var(--color-accent-border)" strokeWidth="0.5" strokeDasharray="3 3"/>
-            <text x="102" y="60" style={{fontSize:"10px",fill:"var(--color-text-dim)",fontFamily:"var(--font-body)",textTransform:"uppercase",letterSpacing:"0.08em"}}>API layer</text>
+            {/* Dividers */}
+            <line x1="136" y1="30" x2="136" y2="340" stroke="var(--color-accent-border)" strokeWidth="0.5" strokeDasharray="3 3"/>
+            <line x1="258" y1="30" x2="258" y2="340" stroke="var(--color-accent-border)" strokeWidth="0.5" strokeDasharray="3 3"/>
+            <line x1="430" y1="30" x2="430" y2="340" stroke="var(--color-accent-border)" strokeWidth="0.5" strokeDasharray="3 3"/>
 
-            {/* Application layer */}
-            <rect x="170" y="78" width="340" height="224" rx="8" fill="none" stroke="var(--color-accent-border)" strokeWidth="0.5" strokeDasharray="3 3"/>
-            <text x="182" y="94" style={{fontSize:"10px",fill:"var(--color-text-dim)",fontFamily:"var(--font-body)",textTransform:"uppercase",letterSpacing:"0.08em"}}>Application layer</text>
+            {/* INTERFACES */}
+            {INTERFACES.map(({ label, y }) => (
+              <g key={label}>
+                <rect x="14" y={y} width="110" height="30" rx="6" fill="none" stroke="var(--color-accent-border)" strokeWidth="0.5"/>
+                <text fontSize="11" x="69" y={y + 15} textAnchor="middle" dominantBaseline="central" fill="var(--color-text-muted)" fontFamily="var(--font-body)">{label}</text>
+              </g>
+            ))}
 
-            {/* Domain layer (center) */}
-            <rect x="234" y="108" width="212" height="130" rx="8" fill="rgba(37,99,235,0.06)" stroke="rgba(37,99,235,0.25)" strokeWidth="0.5"/>
-            <text x="246" y="124" style={{fontSize:"10px",fill:"var(--color-accent-light)",fontFamily:"var(--font-body)",textTransform:"uppercase",letterSpacing:"0.08em"}}>Domain layer</text>
+            {/* INTERFACES → APPLICATION */}
+            <line x1="124" y1="140" x2="148" y2="140" stroke="var(--color-text-faint)" strokeWidth="0.5" markerEnd="url(#arrow)" fill="none"/>
 
-            {/* Domain boxes: Entities + Gateways */}
-            <rect x="246" y="132" width="80" height="32" rx="6" fill="rgba(37,99,235,0.12)" stroke="rgba(37,99,235,0.3)" strokeWidth="0.5"/>
-            <text x="286" y="148" textAnchor="middle" dominantBaseline="central" style={{fontSize:"11px",fontWeight:"500",fill:"var(--color-accent-light)",fontFamily:"var(--font-body)"}}>Entities</text>
+            {/* APPLICATION */}
+            {APPLICATION.map(({ label, y }) => (
+              <g key={label}>
+                <rect x="148" y={y} width="100" height="30" rx="6" fill="none" stroke="var(--color-accent-border)" strokeWidth="0.5"/>
+                <text fontSize="11" x="198" y={y + 15} textAnchor="middle" dominantBaseline="central" fill="var(--color-text-muted)" fontFamily="var(--font-body)">{label}</text>
+              </g>
+            ))}
 
-            <rect x="338" y="132" width="96" height="32" rx="6" fill="rgba(37,99,235,0.12)" stroke="rgba(37,99,235,0.3)" strokeWidth="0.5"/>
-            <text x="386" y="148" textAnchor="middle" dominantBaseline="central" style={{fontSize:"11px",fontWeight:"500",fill:"var(--color-accent-light)",fontFamily:"var(--font-body)"}}>Gateways</text>
+            {/* APPLICATION → DOMAIN */}
+            <line x1="248" y1="140" x2="268" y2="140" stroke="var(--color-text-faint)" strokeWidth="0.5" markerEnd="url(#arrow)" fill="none"/>
 
-            {/* Use cases — full width of domain box */}
-            <rect x="246" y="176" width="188" height="32" rx="6" fill="rgba(37,99,235,0.12)" stroke="rgba(37,99,235,0.3)" strokeWidth="0.5"/>
-            <text x="340" y="192" textAnchor="middle" dominantBaseline="central" style={{fontSize:"10px",fontWeight:"500",fill:"var(--color-accent-light)",fontFamily:"var(--font-body)"}}>Use cases (commands &amp; queries)</text>
+            {/* DOMAIN */}
+            <rect x="268" y="46" width="152" height="260" rx="10" fill="rgba(37,99,235,0.06)" stroke="rgba(37,99,235,0.25)" strokeWidth="0.5"/>
+            <text fontSize="11" fontWeight="700" x="344" y="68" textAnchor="middle" dominantBaseline="central" fill="var(--color-accent-light)" fontFamily="var(--font-body)">Domain</text>
+            {DOMAIN.map(({ label, y }) => (
+              <g key={label}>
+                <rect x="280" y={y} width="128" height="30" rx="6" fill="rgba(37,99,235,0.1)" stroke="rgba(37,99,235,0.2)" strokeWidth="0.5"/>
+                <text fontSize="11" x="344" y={y + 15} textAnchor="middle" dominantBaseline="central" fill="var(--color-accent-light)" fontFamily="var(--font-body)">{label}</text>
+              </g>
+            ))}
 
-            {/* Application layer boxes: Error/Result — centrados verticalmente */}
-            <rect x="182" y="168" width="44" height="44" rx="6" fill="var(--color-bg)" stroke="var(--color-accent-border)" strokeWidth="0.5"/>
-            <text x="204" y="186" textAnchor="middle" style={{fontSize:"9px",fill:"var(--color-text-muted)",fontFamily:"var(--font-body)"}}>Error /</text>
-            <text x="204" y="200" textAnchor="middle" style={{fontSize:"9px",fill:"var(--color-text-muted)",fontFamily:"var(--font-body)"}}>Result</text>
+            {/* INFRASTRUCTURE */}
+            {INFRASTRUCTURE.map(({ label, y }) => (
+              <g key={label}>
+                <rect x="440" y={y} width="110" height="30" rx="6" fill="none" stroke="var(--color-accent-border)" strokeWidth="0.5"/>
+                <text fontSize="11" x="495" y={y + 15} textAnchor="middle" dominantBaseline="central" fill="var(--color-text-muted)" fontFamily="var(--font-body)">{label}</text>
+              </g>
+            ))}
 
-            <rect x="454" y="168" width="44" height="44" rx="6" fill="var(--color-bg)" stroke="var(--color-accent-border)" strokeWidth="0.5"/>
-            <text x="476" y="186" textAnchor="middle" style={{fontSize:"9px",fill:"var(--color-text-muted)",fontFamily:"var(--font-body)"}}>Error /</text>
-            <text x="476" y="200" textAnchor="middle" style={{fontSize:"9px",fill:"var(--color-text-muted)",fontFamily:"var(--font-body)"}}>Result</text>
+            {/* INFRASTRUCTURE → DOMAIN (implements, dashed) */}
+            <line x1="440" y1="140" x2="422" y2="140" stroke="var(--color-accent)" strokeWidth="0.8" strokeDasharray="4 3" markerEnd="url(#arrow)" fill="none"/>
+            <text fontSize="9" x="431" y="134" textAnchor="middle" fill="var(--color-accent-light)" fontFamily="var(--font-body)">implements</text>
 
-            {/* API layer boxes: REST API + DTO/Mapper (left) */}
-            <rect x="104" y="120" width="64" height="32" rx="6" fill="var(--color-bg)" stroke="var(--color-accent-border)" strokeWidth="0.5"/>
-            <text x="136" y="136" textAnchor="middle" dominantBaseline="central" style={{fontSize:"11px",fill:"var(--color-text-muted)",fontFamily:"var(--font-body)"}}>REST API</text>
+            {/* CQRS note */}
+            <text fontSize="10" x="198" y="355" textAnchor="middle" fill="var(--color-text-faint)" fontFamily="var(--font-body)">CQRS: queries → JPA direct (bypass domain)</text>
 
-            <rect x="104" y="190" width="64" height="44" rx="6" fill="var(--color-bg)" stroke="var(--color-accent-border)" strokeWidth="0.5"/>
-            <text x="136" y="208" textAnchor="middle" style={{fontSize:"10px",fill:"var(--color-text-muted)",fontFamily:"var(--font-body)"}}>DTO /</text>
-            <text x="136" y="222" textAnchor="middle" style={{fontSize:"10px",fill:"var(--color-text-muted)",fontFamily:"var(--font-body)"}}>Mapper</text>
-
-            {/* API layer boxes: REST API + DTO/Mapper (right) */}
-            <rect x="512" y="120" width="64" height="32" rx="6" fill="var(--color-bg)" stroke="var(--color-accent-border)" strokeWidth="0.5"/>
-            <text x="544" y="136" textAnchor="middle" dominantBaseline="central" style={{fontSize:"11px",fill:"var(--color-text-muted)",fontFamily:"var(--font-body)"}}>REST API</text>
-
-            <rect x="512" y="190" width="64" height="44" rx="6" fill="var(--color-bg)" stroke="var(--color-accent-border)" strokeWidth="0.5"/>
-            <text x="544" y="208" textAnchor="middle" style={{fontSize:"10px",fill:"var(--color-text-muted)",fontFamily:"var(--font-body)"}}>DTO /</text>
-            <text x="544" y="222" textAnchor="middle" style={{fontSize:"10px",fill:"var(--color-text-muted)",fontFamily:"var(--font-body)"}}>Mapper</text>
-
-            {/* Infrastructure boxes left */}
-            <rect x="14" y="75" width="72" height="32" rx="6" fill="var(--color-bg)" stroke="var(--color-accent-border)" strokeWidth="0.5"/>
-            <text x="50" y="91" textAnchor="middle" dominantBaseline="central" style={{fontSize:"10px",fill:"var(--color-text-muted)",fontFamily:"var(--font-body)"}}>GeminiClient</text>
-
-            <rect x="14" y="133" width="72" height="32" rx="6" fill="var(--color-bg)" stroke="var(--color-accent-border)" strokeWidth="0.5"/>
-            <text x="50" y="149" textAnchor="middle" dominantBaseline="central" style={{fontSize:"11px",fill:"var(--color-text-muted)",fontFamily:"var(--font-body)"}}>R2Client</text>
-
-            <rect x="14" y="191" width="72" height="32" rx="6" fill="var(--color-bg)" stroke="var(--color-accent-border)" strokeWidth="0.5"/>
-            <text x="50" y="207" textAnchor="middle" dominantBaseline="central" style={{fontSize:"11px",fill:"var(--color-text-muted)",fontFamily:"var(--font-body)"}}>JPA Repos</text>
-
-            <rect x="14" y="249" width="72" height="32" rx="6" fill="var(--color-bg)" stroke="var(--color-accent-border)" strokeWidth="0.5"/>
-            <text x="50" y="265" textAnchor="middle" dominantBaseline="central" style={{fontSize:"10px",fill:"var(--color-text-muted)",fontFamily:"var(--font-body)"}}>DemoResetJob</text>
-
-            {/* Infrastructure boxes right */}
-            <rect x="594" y="75" width="76" height="32" rx="6" fill="var(--color-bg)" stroke="var(--color-accent-border)" strokeWidth="0.5"/>
-            <text x="632" y="91" textAnchor="middle" dominantBaseline="central" style={{fontSize:"10px",fill:"var(--color-text-muted)",fontFamily:"var(--font-body)"}}>AssistantGuard</text>
-
-            <rect x="594" y="133" width="76" height="32" rx="6" fill="var(--color-bg)" stroke="var(--color-accent-border)" strokeWidth="0.5"/>
-            <text x="632" y="149" textAnchor="middle" dominantBaseline="central" style={{fontSize:"11px",fill:"var(--color-text-muted)",fontFamily:"var(--font-body)"}}>Spring Sec.</text>
-
-            <rect x="594" y="191" width="76" height="32" rx="6" fill="var(--color-bg)" stroke="var(--color-accent-border)" strokeWidth="0.5"/>
-            <text x="632" y="207" textAnchor="middle" dominantBaseline="central" style={{fontSize:"11px",fill:"var(--color-text-muted)",fontFamily:"var(--font-body)"}}>Flyway</text>
-
-            {/* Arrows: Infrastructure → API (left) */}
-            <line x1="86" y1="91" x2="100" y2="136" stroke="var(--color-text-faint)" strokeWidth="0.5" markerEnd="url(#arrow)" fill="none"/>
-            <line x1="86" y1="149" x2="100" y2="207" stroke="var(--color-text-faint)" strokeWidth="0.5" markerEnd="url(#arrow)" fill="none"/>
-            <line x1="86" y1="207" x2="100" y2="215" stroke="var(--color-text-faint)" strokeWidth="0.5" markerEnd="url(#arrow)" fill="none"/>
-            <line x1="86" y1="265" x2="100" y2="225" stroke="var(--color-text-faint)" strokeWidth="0.5" markerEnd="url(#arrow)" fill="none"/>
-
-            {/* Arrows: Infrastructure → API (right) */}
-            <line x1="594" y1="91" x2="580" y2="136" stroke="var(--color-text-faint)" strokeWidth="0.5" markerEnd="url(#arrow)" fill="none"/>
-            <line x1="594" y1="149" x2="580" y2="207" stroke="var(--color-text-faint)" strokeWidth="0.5" markerEnd="url(#arrow)" fill="none"/>
-            <line x1="594" y1="207" x2="580" y2="215" stroke="var(--color-text-faint)" strokeWidth="0.5" markerEnd="url(#arrow)" fill="none"/>
-
-            {/* Arrows: API → Application (left) — REST API y DTO/Mapper → Error/Result */}
-            <line x1="168" y1="136" x2="182" y2="182" stroke="var(--color-text-faint)" strokeWidth="0.5" markerEnd="url(#arrow)" fill="none"/>
-            <line x1="168" y1="212" x2="182" y2="196" stroke="var(--color-text-faint)" strokeWidth="0.5" markerEnd="url(#arrow)" fill="none"/>
-
-            {/* Arrows: API → Application (right) — REST API y DTO/Mapper → Error/Result */}
-            <line x1="512" y1="136" x2="498" y2="182" stroke="var(--color-text-faint)" strokeWidth="0.5" markerEnd="url(#arrow)" fill="none"/>
-            <line x1="512" y1="212" x2="498" y2="196" stroke="var(--color-text-faint)" strokeWidth="0.5" markerEnd="url(#arrow)" fill="none"/>
-
-            {/* Arrows: Application → Domain — Error/Result → Domain (horizontal) */}
-            <line x1="226" y1="190" x2="242" y2="190" stroke="var(--color-text-faint)" strokeWidth="0.5" markerEnd="url(#arrow)" fill="none"/>
-            <line x1="454" y1="190" x2="438" y2="190" stroke="var(--color-text-faint)" strokeWidth="0.5" markerEnd="url(#arrow)" fill="none"/>
-
-            {/* Modules footer */}
-            <text x="340" y="388" textAnchor="middle" style={{fontSize:"10px",fill:"var(--color-text-faint)",fontFamily:"var(--font-body)"}}>Modules: products · warehouse · inventory · suppliers · users · assistant · shared</text>
+            {/* Modules */}
+            <text fontSize="10" x="340" y="372" textAnchor="middle" fill="var(--color-text-faint)" fontFamily="var(--font-body)">
+              Modules: products · warehouse · inventory · suppliers · users · assistant · shared
+            </text>
           </svg>
         </div>
 

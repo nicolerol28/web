@@ -23,15 +23,17 @@ export default function AboutSection() {
         <div className="about-body">
           <h3>¿Curiosidad sobre mí? — aquí tienes un resumen.</h3>
           <p>
-            Soy desarrolladora Full Stack con foco en Java / Spring Boot y React, 
+            Soy desarrolladora Full Stack enfocada en Java / Spring Boot y React, 
             apasionada por construir productos digitales completos — desde el diseño 
             de la arquitectura backend hasta la interfaz que ve el usuario.
           </p>
           <p>
-            Me interesa especialmente la integración de IA en aplicaciones reales. 
-            En uno de mis proyectos implementé Gemini 2.5 Flash para generar insights 
-            automáticos de inventario y un asistente de chat contextual con protección 
-            contra prompt injection y rate limiting.
+            Me interesa especialmente la integración de IA en aplicaciones reales.
+            En uno de mis proyectos implementé IA no como add-on sino como parte del
+            núcleo del sistema — Gemini 2.5 Flash con contexto dinámico de inventario,
+            protección contra prompt injection y rate limiting. Actualmente profundizo
+            en RAG y MCP para construir sistemas donde los LLMs tengan herramientas,
+            memoria y contexto real.
           </p>
           <p>
             Tengo experiencia en Clean Architecture, CQRS, autenticación JWT + Google OAuth, 

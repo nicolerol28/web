@@ -21,10 +21,11 @@ export const experiences = [
     subtitle: "Universidad del Valle · Palmira",
     period: "feb 2023 – presente",
     bullets: [
-      "Formación en arquitectura backend con Java / Spring Boot y diseño de APIs REST.",
+      "Formación en desarrollo de software con fundamentos en programación orientada a objetos, estructuras de datos y lógica backend.",
       "Desarrollo web con React.js, HTML, CSS y JavaScript.",
       "Gestión de bases de datos: PostgreSQL, MySQL y Oracle Database.",
       "Procesamiento de datos con Python, PySpark y servicios de nube AWS.",
+      "Aplicación de pruebas unitarias para validación de funcionalidades.",
     ],
   },
 ]
