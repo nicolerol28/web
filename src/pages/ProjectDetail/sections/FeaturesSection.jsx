@@ -19,7 +19,7 @@ export default function FeaturesSection({ project }) {
         <div className="docs-features-grid">
           {project.docs.features.map((feature) => (
             <div key={feature} className="docs-features-card">
-              <span className="docs-features-check">✓</span>
+              <span className="docs-ai-feature-dot" />
               <span className="docs-features-text">{feature}</span>
             </div>
           ))}
@@ -49,6 +49,41 @@ export default function FeaturesSection({ project }) {
         </table>
       </div>
 
+      {/* 3. TECHNICAL DEBT */}
+      <div className="docs-debt">
+        <h2 className="docs-overview-section-title">Deuda técnica</h2>
+
+        <p className="docs-overview-desc">
+          Las siguientes decisiones fueron tomadas conscientemente durante el desarrollo
+          y están documentadas aquí para demostrar conciencia de los límites
+          arquitectónicos, no como descuidos.
+        </p>
+
+        <table className="docs-debt-table">
+          <thead>
+            <tr>
+              <th className="docs-debt-th">Área</th>
+              <th className="docs-debt-th">Problema</th>
+              <th className="docs-debt-th">Severidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            {project.docs.debt.map((item, idx) => (
+              <tr key={idx} className="docs-debt-tr">
+                <td className="docs-debt-td docs-debt-td--area">
+                  <span className="docs-debt-area-badge">{item.area}</span>
+                </td>
+                <td className="docs-debt-td">{item.issue}</td>
+                <td className="docs-debt-td docs-debt-td--severity">
+                  <span className={`docs-debt-severity docs-debt-severity--${item.severity}`}>
+                    {item.severity}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }

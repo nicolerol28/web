@@ -6,7 +6,6 @@ const SECTIONS = [
   { id: "ai",          label: "IA & Asistente" },
   { id: "features",    label: "Features" },
   { id: "testing",     label: "Testing" },
-  { id: "debt",        label: "Deuda técnica" },
   { id: "deploy",      label: "Deploy & Costos" },
 ]
 

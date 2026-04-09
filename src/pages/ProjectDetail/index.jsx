@@ -7,7 +7,6 @@ import ArchitectureSection from "./sections/ArchitectureSection"
 import AISection from "./sections/AISection"
 import FeaturesSection from "./sections/FeaturesSection"
 import TestingSection from "./sections/TestingSection"
-import DebtSection from "./sections/DebtSection"
 import DeploySection from "./sections/DeploySection"
 
 const SECTIONS = {
@@ -16,7 +15,6 @@ const SECTIONS = {
   ai:           AISection,
   features:     FeaturesSection,
   testing:      TestingSection,
-  debt:         DebtSection,
   deploy:       DeploySection,
 }
 
