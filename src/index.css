@@ -503,7 +503,7 @@
 
    .docs-sidebar-logo {
      font-family: var(--font-display);
-     font-size: 1rem;
+     font-size: clamp(0.82rem, 1vw, 1rem);
      font-weight: 700;
      color: var(--color-text);
      line-height: 1.3;
@@ -528,9 +528,12 @@
      background: transparent;
      color: var(--color-text-muted);
      font-family: var(--font-body);
-     font-size: 0.875rem;
+     font-size: clamp(0.78rem, 0.9vw, 0.875rem);
      cursor: pointer;
      transition: color 0.15s, background 0.15s, border-color 0.15s;
+     white-space: nowrap;
+     overflow: hidden;
+     text-overflow: ellipsis;
    }
 
    .docs-sidebar-item:hover {
@@ -610,6 +613,10 @@
      gap: 1rem;
    }
 
+   @media (max-width: 600px) {
+     .docs-overview-stats { grid-template-columns: repeat(2, 1fr); }
+   }
+
    .docs-overview-stat-card {
      display: flex;
      flex-direction: column;
@@ -658,6 +665,7 @@
      display: flex;
      align-items: flex-start;
      gap: 1rem;
+     flex-wrap: wrap;
    }
 
    .docs-overview-tag-category {
@@ -1113,6 +1121,7 @@
       color: var(--color-text-dim);
       font-family: monospace;
       font-size: 0.75rem;
+      word-break: break-word;
     }
 
     .docs-ai-injection-grid {
@@ -1129,6 +1138,7 @@
       border: 1px solid var(--color-accent-border);
       border-radius: var(--radius-sm);
       color: var(--color-text-muted);
+      word-break: break-word;
     }
 
    @media (max-width: 768px) {
@@ -1137,6 +1147,10 @@
      .docs-ai-stat:nth-child(1),
      .docs-ai-stat:nth-child(2) { border-bottom: 1px solid var(--color-accent-border); }
      .docs-ai-features { grid-template-columns: 1fr; }
+   }
+
+   @media (max-width: 480px) {
+     .docs-ai-stats { grid-template-columns: repeat(2, 1fr); }
    }
 
    /* ─── DOCS FEATURES SECTION ─────────────────────────────────── */
@@ -1322,6 +1336,11 @@
     }
 
     /* Modules table */
+    .docs-testing-table-wrap {
+      overflow-x: auto;
+      width: 100%;
+    }
+
     .docs-testing-table {
       width: 100%;
       border-collapse: separate;
@@ -1394,6 +1413,7 @@
 
     @media (max-width: 768px) {
       .docs-testing-stats { grid-template-columns: repeat(2, 1fr); }
+      .docs-testing-table { display: block; overflow-x: auto; width: 100%; }
     }
 
    /* ─── DOCS DEBT SECTION ─────────────────────────────────────── */
@@ -1443,6 +1463,8 @@
    .docs-debt-table-wrap {
      max-width: 860px;
      margin: 0 auto;
+     overflow-x: auto;
+     width: 100%;
    }
 
    .docs-debt-td {
@@ -1509,9 +1531,10 @@
    }
 
    @media (max-width: 640px) {
-     .docs-debt-table { font-size: 0.8rem; }
+     .docs-debt-table { font-size: 0.8rem; display: block; overflow-x: auto; width: 100%; }
      .docs-debt-td--area { width: auto; }
      .docs-debt-td--severity { width: auto; }
+     .docs-features-table { display: block; overflow-x: auto; width: 100%; }
    }
 
    /* ─── DOCS DEPLOY SECTION ───────────────────────────────────── */
@@ -1666,20 +1689,30 @@
     min-width: 0;
   }
 
+  @media (max-width: 1100px) {
+    .docs-layout-sidebar { width: 200px; }
+    .docs-layout-content { margin-left: 200px; }
+  }
+
+  @media (max-width: 900px) {
+    .docs-layout-sidebar { width: 180px; }
+    .docs-layout-content { margin-left: 180px; padding: 2rem 1.5rem 3rem 1.5rem; padding-top: calc(68px + 2rem); }
+  }
+
   @media (max-width: 768px) {
     .docs-layout { flex-direction: column; }
-    .docs-layout-sidebar { 
-      width: 100%; 
-      position: static; 
-      height: auto; 
+    .docs-layout-sidebar {
+      width: 100%;
+      position: static;
+      height: auto;
       padding-top: 68px;
       border-right: none;
       border-bottom: 1px solid var(--color-accent-border);
     }
     .docs-layout-sidebar .docs-sidebar { height: auto; }
-    .docs-layout-content { 
+    .docs-layout-content {
       margin-left: 0;
-      padding: 1.5rem 1.1rem; 
+      padding: 1.5rem 1.1rem;
     }
   }
    

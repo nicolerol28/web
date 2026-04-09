@@ -40,7 +40,7 @@ export default function HeroSection({ onScrollTo }) {
           </div>
         </div>
         <div className="hero-avatar">
-          <img src="/images/retrato.JPG" alt="Nicole Roldan" className="avatar-photo" />
+          <img src="/images/retrato.jpeg" alt="Nicole Roldan" className="avatar-photo" />
         </div>
       </div>
     </section>

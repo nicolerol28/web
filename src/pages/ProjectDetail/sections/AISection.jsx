@@ -14,6 +14,10 @@ export default function AISection({ project }) {
     { label: "Endpoint",    value: ai.endpoint },
     { label: "Rate limit",  value: ai.rateLimit },
     { label: "Cache",       value: `${ai.cacheSeconds}s` },
+    { label: "Latencia",        value: ai.latency.avg },
+    { label: "Rango",           value: `${ai.latency.min} – ${ai.latency.max}` },
+    { label: "Tokens prompt",   value: ai.tokens?.prompt },
+    { label: "Tokens respuesta", value: ai.tokens?.response },
   ]
 
   return (
@@ -81,6 +85,9 @@ export default function AISection({ project }) {
         <p className="docs-ai-context-desc">
           No es RAG con vector DB — es un snapshot SQL rico del estado real del negocio,
           reconstruido cada 30s y enviado como contexto en cada prompt.
+        </p>
+        <p className="docs-ai-context-desc" style={{ marginTop: "0.5rem" }}>
+          {ai.tokens?.note}
         </p>
         <div className="docs-ai-queries">
           {ai.contextQueries?.map((q) => (

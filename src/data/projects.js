@@ -41,6 +41,19 @@ export const projects = [
         rateLimit: "10 req/min por IP (ventana fija de 60s)",
         cacheSeconds: 30,
         injectionPatterns: 17,
+        tokens: {
+          prompt: "3.532 – 3.591",
+          response: "9 – 406",
+          total: "3.582 – 5.166",
+          avgTotal: "~4.300",
+          note: "El contexto SQL representa ~85–99% de los tokens por request. Muestras reales desde Railway logs.",
+        },
+        latency: {
+          min: "1s",
+          max: "11s",
+          avg: "~6-8s",
+          note: "Incluye construcción del contexto SQL + llamada a Gemini API. Cold starts en Railway pueden agregar latencia adicional.",
+        },
         injectionPatternsList: [
           "ignore previous",
           "ignora las instrucciones",
