@@ -1,16 +1,81 @@
-# React + Vite
+# Nicole Roldán — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio and project documentation site for Nicole Roldán, Full Stack Developer with a focus on AI Engineering. Live at **[nicoleroldan.com](https://nicoleroldan.com)**.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+| Layer | Technology |
+|---|---|
+| Framework | React 19 |
+| Build tool | Vite 7 |
+| Routing | React Router DOM 7 |
+| Styling | CSS (custom properties, responsive) |
+| Linting | ESLint 9 |
+| Language | JavaScript (ESM) |
 
-## React Compiler
+No UI library. No CSS framework. Custom layout, sidebar, and component system.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Project Structure
 
-## Expanding the ESLint configuration
+```
+src/
+├── assets/
+│   └── screenshots/          # Project screenshots
+├── components/
+│   ├── icons/                # Icon components
+│   ├── ui/                   # Shared UI primitives (Badge, Button, SectionHeader, SocialButton)
+│   ├── Layout.jsx
+│   ├── Navbar.jsx
+│   └── Sidebar.jsx
+├── data/                     # Static data layer
+│   ├── contacts.js
+│   ├── experiences.js
+│   ├── navigation.js
+│   ├── projects.js           # Project definitions + full documentation content
+│   └── skills.js
+├── hooks/
+│   └── useActiveSection.js   # Scroll-based active section tracking
+├── pages/
+│   ├── Portfolio/
+│   │   ├── sections/         # Hero, About, Skills, Projects, Experience, Contact
+│   │   └── index.jsx
+│   └── ProjectDetail/
+│       ├── components/       # AdrCard, DocsSidebar
+│       ├── sections/         # Overview, Features, Architecture, AI, Testing, Deploy
+│       └── index.jsx
+├── App.jsx
+├── main.jsx
+└── index.css
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Routes
+
+| Path | Description |
+|---|---|
+| `/` | Portfolio — single-page with scrollable sections |
+| `/project/:slug` | Project detail — tabbed documentation view |
+
+## Running Locally
+
+```bash
+# Install dependencies
+npm install
+
+# Start dev server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+Requires Node.js 18+.
+
+## Deploy
+
+The site is deployed on **Vercel** with zero configuration. Any push to `main` triggers a new deployment.
+
+- Production: [nicoleroldan.com](https://nicoleroldan.com)
+- Project docs included in the site (no external CMS — content lives in `src/data/projects.js`)
