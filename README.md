@@ -1,6 +1,8 @@
-# Nicole Roldán — Portfolio
+# Nicole Roldan — Portfolio
 
-Personal portfolio and project documentation site for Nicole Roldán, Full Stack Developer with a focus on AI Engineering. Live at **[nicoleroldan.com](https://nicoleroldan.com)**.
+Personal portfolio and project documentation site for Nicole Roldan, Full Stack Developer with a focus on AI Engineering. Live at **[nicoleroldan.com](https://nicoleroldan.com)**.
+
+> This portfolio is continuously updated as new projects, features, and learnings are added.
 
 ## Stack
 
@@ -54,6 +56,10 @@ src/
 |---|---|
 | `/` | Portfolio — single-page with scrollable sections |
 | `/project/:slug` | Project detail — tabbed documentation view |
+
+## CVs
+
+Downloadable CVs available in ES/EN from the site header. Generated with ReportLab and served as static PDF files from `public/`.
 
 ## Running Locally
 
