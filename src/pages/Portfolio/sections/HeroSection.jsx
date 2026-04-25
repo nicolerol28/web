@@ -1,4 +1,4 @@
-import { GitHubIcon, InstagramIcon } from "../../../components/icons/index"
+import { GitHubIcon, LinkedInIcon } from "../../../components/icons/index"
 import SocialButton from "../../../components/ui/SocialButton"
 import contacts from "../../../data/contacts"
 
@@ -36,7 +36,7 @@ export default function HeroSection({ onScrollTo }) {
           </div>
           <div className="hero-socials">
             <SocialButton href={contacts.github} icon={<GitHubIcon />} />
-            <SocialButton href={contacts.instagram} icon={<InstagramIcon />} />
+            <SocialButton href={contacts.linkedin} icon={<LinkedInIcon />} />
           </div>
         </div>
         <div className="hero-avatar">
