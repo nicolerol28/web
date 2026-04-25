@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom"
+import BackgroundLines from "../../components/BackgroundLines/BackgroundLines"
 import HeroSection from "./sections/HeroSection"
 import AboutSection from "./sections/AboutSection"
 import SkillsSection from "./sections/SkillsSection"
@@ -13,6 +14,8 @@ export default function Portfolio() {
   const onScrollTo = (href) => document.getElementById(href.slice(1))?.scrollIntoView({ behavior: "smooth" })
 
   return (
+    <>
+    <BackgroundLines />
     <div className="nr-page">
       <HeroSection onScrollTo={onScrollTo} />
       <div className="nr-divider" />
@@ -26,5 +29,6 @@ export default function Portfolio() {
       <div className="nr-divider" />
       <ContactSection />
     </div>
+    </>
   )
 }

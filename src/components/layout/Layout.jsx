@@ -1,9 +1,9 @@
 import { useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
-import { navLinks } from "../data/navigation"
-import { useActiveSection } from "../hooks/useActiveSection"
-import Navbar from "./Navbar"
-import Sidebar from "./Sidebar"
+import { navLinks } from "../../data/navigation"
+import { useActiveSection } from "../../hooks/useActiveSection"
+import Navbar from "./Navbar";
+import Sidebar from "./Sidebar";
 
 const sectionIds = navLinks.map(l => l.href.slice(1))
 

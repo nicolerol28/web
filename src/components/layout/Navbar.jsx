@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react"
-import { navLinks } from "../data/navigation"
-import { MenuIcon } from "./icons/index"
+import { navLinks } from "../../data/navigation"
+import { MenuIcon } from "../icons/index"
 
 const CV_OPTIONS = [
   { label: "📄 Español", href: "/CV-NicoleRoldan-ES.pdf" },
