@@ -299,19 +299,21 @@
    .about-fact { display: flex; align-items: center; gap: 0.55rem; font-size: 0.85rem; color: var(--color-text-muted); }
    .fact-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--color-accent-hover); flex-shrink: 0; }
 
-   /* ─── SKILLS ─────────────────────────────────────────────────── */
-   #skills { padding: 5rem 0; }
-   .skills-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 1rem; }
-   .skill-card {
-     display: flex; flex-direction: column; align-items: center; gap: 0.55rem;
-     padding: 1.1rem 0.5rem;
-     background: rgba(15,23,42,0.65); border: 1px solid rgba(37,99,235,0.12);
-     border-radius: var(--radius-md); cursor: default; transition: all 0.25s;
-   }
-   .skill-card:hover { border-color: rgba(37,99,235,0.4); background: rgba(37,99,235,0.08); transform: translateY(-4px); box-shadow: 0 8px     
-   20px rgba(37,99,235,0.15); }
-   .skill-card img { width: 34px; height: 34px; object-fit: contain; }
-   .skill-name { font-size: 0.68rem; font-weight: 500; color: var(--color-text-dim); text-align: center; line-height: 1.2; }
+  /* ─── SKILLS ─────────────────────────────────────────────────── */
+    #skills { padding: 5rem 0; }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 1.5rem; }
+    .skill-card {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 0;
+      padding: 1.4rem 0.75rem 1.4rem;
+      background: rgba(15,23,42,0.65); border: 1px solid rgba(37,99,235,0.12);
+      border-radius: var(--radius-md); cursor: default; transition: all 0.25s;
+      min-width: 0;
+    }
+    .skill-card:hover { border-color: rgba(37,99,235,0.4); background: rgba(37,99,235,0.08); transform: translateY(-4px); box-shadow: 0 8px 20px rgba(37,99,235,0.15); }
+    .skill-card img { width: 36px; height: 36px; object-fit: contain; margin-bottom: 0.75rem; }
+    .skill-name { font-size: 0.68rem; font-weight: 500; color: var(--color-text-dim); text-align: center; line-height: 1.2; }
+    .category-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #6b7280; margin-top: 2rem; margin-bottom: 1.25rem; }
 
    /* ─── PROJECTS ───────────────────────────────────────────────── */
    #projects { padding: 5rem 0; }

@@ -53,15 +53,25 @@ export default function OverviewSection({ project }) {
               Demo →
             </a>
           )}
-          {project.backend && (
-            <a href={project.backend} target="_blank" rel="noopener noreferrer" className="plink plink-gh">
-              Backend
-            </a>
-          )}
-          {project.frontend && (
-            <a href={project.frontend} target="_blank" rel="noopener noreferrer" className="plink plink-gh">
-              Frontend
-            </a>
+          {project.repos ? (
+            project.repos.map(r => (
+              <a key={r.label} href={r.url} target="_blank" rel="noopener noreferrer" className="plink plink-gh">
+                {r.label}
+              </a>
+            ))
+          ) : (
+            <>
+              {project.backend && (
+                <a href={project.backend} target="_blank" rel="noopener noreferrer" className="plink plink-gh">
+                  Backend
+                </a>
+              )}
+              {project.frontend && (
+                <a href={project.frontend} target="_blank" rel="noopener noreferrer" className="plink plink-gh">
+                  Frontend
+                </a>
+              )}
+            </>
           )}
         </div>
       </div>

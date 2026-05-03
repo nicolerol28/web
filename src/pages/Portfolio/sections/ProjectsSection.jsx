@@ -28,15 +28,25 @@ export default function ProjectsSection({ onNavigate }) {
                   <ExternalIcon /> Demo
                 </a>
               )}
-              {p.backend && (
-                <a href={p.backend} target="_blank" rel="noreferrer" className="plink plink-gh" onClick={e => e.stopPropagation()}>
-                  <GitHubIcon size={13} /> Backend
-                </a>
-              )}
-              {p.frontend && (
-                <a href={p.frontend} target="_blank" rel="noreferrer" className="plink plink-gh" onClick={e => e.stopPropagation()}>
-                  <GitHubIcon size={13} /> Frontend
-                </a>
+              {p.repos ? (
+                p.repos.map(r => (
+                  <a key={r.label} href={r.url} target="_blank" rel="noreferrer" className="plink plink-gh" onClick={e => e.stopPropagation()}>
+                    <GitHubIcon size={13} /> {r.label}
+                  </a>
+                ))
+              ) : (
+                <>
+                  {p.backend && (
+                    <a href={p.backend} target="_blank" rel="noreferrer" className="plink plink-gh" onClick={e => e.stopPropagation()}>
+                      <GitHubIcon size={13} /> Backend
+                    </a>
+                  )}
+                  {p.frontend && (
+                    <a href={p.frontend} target="_blank" rel="noreferrer" className="plink plink-gh" onClick={e => e.stopPropagation()}>
+                      <GitHubIcon size={13} /> Frontend
+                    </a>
+                  )}
+                </>
               )}
             </div>
           </div>
