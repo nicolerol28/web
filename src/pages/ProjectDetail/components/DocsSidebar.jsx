@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 
-const SECTIONS = [
+const DEFAULT_SECTIONS = [
   { id: "overview",     label: "Overview" },
   { id: "architecture", label: "Arquitectura" },
   { id: "ai",          label: "IA & Asistente" },
@@ -11,6 +11,7 @@ const SECTIONS = [
 
 export default function DocsSidebar({ activeSection, onNavigate, project }) {
   const navigate = useNavigate()
+  const sections = project.docs?.sections ?? DEFAULT_SECTIONS
 
   return (
     <aside className="docs-sidebar">
@@ -19,7 +20,7 @@ export default function DocsSidebar({ activeSection, onNavigate, project }) {
       </div>
 
       <nav className="docs-sidebar-nav">
-        {SECTIONS.map((section) => (
+        {sections.map((section) => (
           <button
             key={section.id}
             className={`docs-sidebar-item${activeSection === section.id ? " docs-sidebar-item--active" : ""}`}

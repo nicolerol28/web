@@ -8,11 +8,13 @@ import AISection from "./sections/AISection"
 import FeaturesSection from "./sections/FeaturesSection"
 import TestingSection from "./sections/TestingSection"
 import DeploySection from "./sections/DeploySection"
+import AgentsSection from "./sections/AgentsSection"
 
 const SECTIONS = {
   overview:     OverviewSection,
   architecture: ArchitectureSection,
   ai:           AISection,
+  agents:       AgentsSection,
   features:     FeaturesSection,
   testing:      TestingSection,
   deploy:       DeploySection,
