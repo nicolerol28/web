@@ -22,15 +22,13 @@ function edgePoint(cx, cy, tx, ty) {
   return { x: cx + dx * s, y: cy + dy * s }
 }
 
-// Returns SVG path `d` and the label position (bezier midpoint at t=0.5).
-// bend: perpendicular offset in px, sign alternates per connection to spread overlaps.
 function curveData(fp, tp, bend) {
   const dx  = tp.x - fp.x
   const dy  = tp.y - fp.y
   const len = Math.sqrt(dx * dx + dy * dy) || 1
   const mx  = (fp.x + tp.x) / 2
   const my  = (fp.y + tp.y) / 2
-  // 90° clockwise perpendicular scaled to `bend`
+
   const cx  = mx + (dy / len) * bend
   const cy  = my + (-dx / len) * bend
   return {

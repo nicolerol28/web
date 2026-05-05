@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useParams, Navigate } from "react-router-dom"
 import { projects } from "../../data/projects"
 import DocsSidebar from "./components/DocsSidebar"
@@ -23,6 +23,8 @@ const SECTIONS = {
 export default function ProjectDetail() {
   const { slug } = useParams()
   const [activeSection, setActiveSection] = useState("overview")
+
+  useEffect(() => { window.scrollTo(0, 0) }, [slug])
 
   const project = projects.find((p) => p.slug === slug)
   if (!project) return <Navigate to="/" replace />

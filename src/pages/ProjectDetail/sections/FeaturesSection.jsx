@@ -9,8 +9,6 @@ const ROLES = [
   },
 ]
 
-// Split features into named groups when items follow the "prefix — text" pattern.
-// Preserves insertion order of prefixes via Map.
 function groupFeatures(features) {
   const groups    = new Map()
   const ungrouped = []
