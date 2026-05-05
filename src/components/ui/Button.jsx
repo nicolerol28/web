@@ -3,8 +3,9 @@ export default function Button({ variant = "primary", onClick, href, children, d
   const finalClass = className ? `${base} ${className}` : base
 
   if (href) {
+    const safeRel = target === "_blank" ? (rel ?? "noopener noreferrer") : rel
     return (
-      <a href={href} className={finalClass} download={download} target={target} rel={rel}>
+      <a href={href} className={finalClass} download={download} target={target} rel={safeRel}>
         {children}
       </a>
     )
