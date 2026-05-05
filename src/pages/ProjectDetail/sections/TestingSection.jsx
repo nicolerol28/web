@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react"
 
-const STATS = [
+/* ── JaCoCo fallback data ──────────────────────────────────── */
+
+const JACOCO_STATS = [
   { label: "Tests pasando", value: "279",  note: null },
   { label: "Instrucciones", value: "94%",  note: "JaCoCo · excl. DTOs & mappers" },
   { label: "Branches",      value: "96%",  note: "JaCoCo · excl. DTOs & mappers" },
   { label: "Metodología",   value: "BDD",  note: "Given / When / Then" },
 ]
 
-const BARS = [
+const JACOCO_BARS = [
   { label: "Instrucciones", pct: 94, colorVar: "--color-accent" },
   { label: "Branches",      pct: 96, colorVar: "--color-accent-hover" },
 ]
 
-const MODULES = [
+const JACOCO_MODULES = [
   { pkg: "shared.guard",                          instr: "97%",  branches: "90%",  excluded: false },
   { pkg: "products.domain.model",                 instr: "100%", branches: "100%", excluded: false },
   { pkg: "users.application.usecase",             instr: "100%", branches: "100%", excluded: false },
@@ -34,22 +36,111 @@ const MODULES = [
   { pkg: "inventory.infrastructure",              instr: "0%",   branches: "0%",   excluded: true  },
 ]
 
-export default function TestingSection() {
-  const [widths, setWidths] = useState(BARS.map(() => 0))
+/* ── Evals view ────────────────────────────────────────────── */
+
+function EvalsView({ testing }) {
+  return (
+    <div className="docs-testing">
+
+      {/* Stats */}
+      <div className="docs-testing-stats">
+        {testing.stats.map((s) => (
+          <div key={s.label} className="docs-testing-stat">
+            <span className="docs-testing-stat-value">{s.value}</span>
+            <span className="docs-testing-stat-label">{s.label}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Suites */}
+      <div>
+        <h2 className="docs-overview-section-title">Eval suites</h2>
+        <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+          {testing.suites.map((suite) => (
+            <div key={suite.name} className="docs-arch-info-card">
+              {/* Suite header */}
+              <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "0.5rem", flexWrap: "wrap" }}>
+                <span className="docs-arch-adr-col-label">{suite.name}</span>
+                <code style={{
+                  fontSize: "0.7rem",
+                  color: "var(--color-text-faint)",
+                  background: "rgba(37,99,235,0.08)",
+                  padding: "0.1rem 0.4rem",
+                  borderRadius: "4px",
+                  border: "0.5px solid var(--color-accent-border)",
+                }}>
+                  {suite.file}
+                </code>
+              </div>
+
+              {/* Description */}
+              <p style={{ marginBottom: "0.75rem", fontSize: "0.85rem", color: "var(--color-text-muted)" }}>
+                {suite.description}
+              </p>
+
+              {/* Scorers table */}
+              <table className="docs-testing-table">
+                <thead>
+                  <tr>
+                    <th className="docs-testing-th">Scorer</th>
+                    <th className="docs-testing-th">Threshold</th>
+                    <th className="docs-testing-th">Scope</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {suite.scorers.map((scorer) => (
+                    <tr key={scorer.name} className="docs-testing-tr">
+                      <td className="docs-testing-td">
+                        <span className="docs-testing-pkg">{scorer.name}</span>
+                        {scorer.custom && (
+                          <span style={{
+                            marginLeft: "0.4rem",
+                            fontSize: "0.65rem",
+                            padding: "0.1rem 0.35rem",
+                            borderRadius: "4px",
+                            background: "rgba(234,179,8,0.12)",
+                            color: "#ca8a04",
+                            border: "0.5px solid rgba(234,179,8,0.3)",
+                            verticalAlign: "middle",
+                          }}>
+                            custom
+                          </span>
+                        )}
+                      </td>
+                      <td className="docs-testing-td">
+                        <span className="docs-testing-badge docs-testing-badge--green">{scorer.threshold}</span>
+                      </td>
+                      <td className="docs-testing-td" style={{ color: "var(--color-text-muted)", fontSize: "0.8rem" }}>
+                        {scorer.scope}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  )
+}
+
+/* ── JaCoCo view ───────────────────────────────────────────── */
+
+function JaCoCoView() {
+  const [widths, setWidths] = useState(JACOCO_BARS.map(() => 0))
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setWidths(BARS.map((b) => b.pct))
-    }, 100)
+    const timer = setTimeout(() => setWidths(JACOCO_BARS.map((b) => b.pct)), 100)
     return () => clearTimeout(timer)
   }, [])
 
   return (
     <div className="docs-testing">
 
-      {/* 1. STATS */}
       <div className="docs-testing-stats">
-        {STATS.map((s) => (
+        {JACOCO_STATS.map((s) => (
           <div key={s.label} className="docs-testing-stat">
             <span className="docs-testing-stat-value">{s.value}</span>
             <span className="docs-testing-stat-label">{s.label}</span>
@@ -58,11 +149,10 @@ export default function TestingSection() {
         ))}
       </div>
 
-      {/* 2. PROGRESS BARS */}
       <div>
         <h2 className="docs-overview-section-title">Cobertura</h2>
         <div className="docs-testing-bars">
-          {BARS.map((bar, idx) => (
+          {JACOCO_BARS.map((bar, idx) => (
             <div key={bar.label} className="docs-testing-bar-row">
               <div className="docs-testing-bar-meta">
                 <span className="docs-testing-bar-label">{bar.label}</span>
@@ -71,10 +161,7 @@ export default function TestingSection() {
               <div className="docs-testing-bar-track">
                 <div
                   className="docs-testing-bar-fill"
-                  style={{
-                    width: `${widths[idx]}%`,
-                    background: `var(${bar.colorVar})`,
-                  }}
+                  style={{ width: `${widths[idx]}%`, background: `var(${bar.colorVar})` }}
                 />
               </div>
             </div>
@@ -82,7 +169,6 @@ export default function TestingSection() {
         </div>
       </div>
 
-      {/* 3. MODULES */}
       <div>
         <h2 className="docs-overview-section-title">Módulos testeados</h2>
         <table className="docs-testing-table">
@@ -94,8 +180,8 @@ export default function TestingSection() {
             </tr>
           </thead>
           <tbody>
-            {MODULES.map((mod) => {
-              const rowClass = `docs-testing-tr${mod.excluded ? " docs-testing-tr--excluded" : ""}`
+            {JACOCO_MODULES.map((mod) => {
+              const rowClass   = `docs-testing-tr${mod.excluded ? " docs-testing-tr--excluded" : ""}`
               const badgeClass = mod.excluded
                 ? "docs-testing-badge docs-testing-badge--excluded"
                 : "docs-testing-badge docs-testing-badge--green"
@@ -111,7 +197,7 @@ export default function TestingSection() {
                     <span className={badgeClass}>{mod.instr}</span>
                   </td>
                   <td className="docs-testing-td">
-                    <span className={mod.excluded ? "docs-testing-badge docs-testing-badge--excluded" : "docs-testing-badge docs-testing-badge--green"}>{mod.branches}</span>
+                    <span className={badgeClass}>{mod.branches}</span>
                   </td>
                 </tr>
               )
@@ -122,4 +208,16 @@ export default function TestingSection() {
 
     </div>
   )
+}
+
+/* ── Entry point ───────────────────────────────────────────── */
+
+export default function TestingSection({ project }) {
+  const testing = project?.docs?.testing
+
+  if (testing?.type === "evals") {
+    return <EvalsView testing={testing} />
+  }
+
+  return <JaCoCoView />
 }

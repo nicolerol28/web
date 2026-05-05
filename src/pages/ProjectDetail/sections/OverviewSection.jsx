@@ -1,14 +1,4 @@
-import imgLogin from '../../../assets/screenshots/login.png';
-import imgDashboard from '../../../assets/screenshots/dashboard.png';
-import imgProdTable from '../../../assets/screenshots/products-table.png';
-import imgProdCatalog from '../../../assets/screenshots/products-catalog.png';
-import imgProdModal from '../../../assets/screenshots/product-modal.png';
-import imgMovements from '../../../assets/screenshots/movements.png';
-import imgSuppliers from '../../../assets/screenshots/suppliers.png';
-import imgWarehouses from '../../../assets/screenshots/warehouses.png';
-import imgSetCat from '../../../assets/screenshots/settings-category.png';
-import imgSetUnit from '../../../assets/screenshots/settings-unit.png';
-import imgUsers from '../../../assets/screenshots/users.png';
+import { screenshotsMap } from '../../../data/screenshotsMap';
 
 const TAG_COLORS = {
   backend:  "docs-overview-tag--blue",
@@ -24,20 +14,7 @@ const CATEGORY_LABELS = {
 
 export default function OverviewSection({ project }) {
   const { docs } = project;
-
-  const screenshots = [
-    { src: imgLogin, alt: "Login" },
-    { src: imgDashboard, alt: "Dashboard with AI Insights" },
-    { src: imgProdTable, alt: "Products — Table View" },
-    { src: imgProdCatalog, alt: "Products — Catalog View" },
-    { src: imgProdModal, alt: "Product Detail Modal" },
-    { src: imgMovements, alt: "Inventory Movements" },
-    { src: imgSuppliers, alt: "Suppliers" },
-    { src: imgWarehouses, alt: "Warehouses" },
-    { src: imgSetCat, alt: "Settings — Categories" },
-    { src: imgSetUnit, alt: "Settings — Units" },
-    { src: imgUsers, alt: "Users" },
-  ];
+  const screenshots = screenshotsMap[project.slug] ?? [];
 
   return (
     <div className="docs-overview">
@@ -109,30 +86,50 @@ export default function OverviewSection({ project }) {
         </div>
       </div>
 
-      {/* 4. SCREENSHOTS */}
-      <div className="docs-overview-screenshots">
-        <h2 className="docs-overview-section-title">Screenshots</h2>
+      {/* 4. SCREENSHOTS / ECOSYSTEM DIAGRAM */}
+      {screenshots.length > 0 ? (
+        <div className="docs-overview-screenshots">
+          <h2 className="docs-overview-section-title">Screenshots</h2>
 
-        <div className="docs-screenshots-grid">
-          {screenshots.map((img) => (
-            <div key={img.alt} className="docs-screenshot-item">
-              
-              <p className="screenshot-caption">
-                {img.alt}
-              </p>
-
-              <div className="screenshot-wrapper">
-                <img
-                  src={img.src}
-                  alt={img.alt}
-                  loading="lazy"
-                />
+          <div className="docs-screenshots-grid">
+            {screenshots.map((img) => (
+              <div key={img.alt} className="docs-screenshot-item">
+                <p className="screenshot-caption">{img.alt}</p>
+                <div className="screenshot-wrapper">
+                  <img src={img.src} alt={img.alt} loading="lazy" />
+                </div>
               </div>
-
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      ) : docs.architecture?.services ? (
+        <div className="docs-overview-screenshots">
+          <div>
+            <h2 className="docs-overview-section-title">Servicios del ecosistema</h2>
+            <div className="docs-deploy-grid">
+              {docs.architecture.services.map((service) => (
+                <div key={service.id} className="docs-deploy-card">
+                  <span className="docs-deploy-card-label">{service.role}</span>
+                  <span className="docs-deploy-card-value">{service.label}</span>
+                  <span className="docs-deploy-cost-tier">{service.tech}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div style={{ marginTop: "2rem" }}>
+            <h2 className="docs-overview-section-title">Conexiones</h2>
+            <div className="docs-deploy-costs">
+              {docs.architecture.connections.map((conn) => (
+                <div key={`${conn.from}-${conn.to}`} className="docs-deploy-cost-row">
+                  <span className="docs-deploy-cost-service">{conn.from} → {conn.to}</span>
+                  <span className="docs-ai-injection-tag">{conn.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      ) : null}
 
     </div>
   );

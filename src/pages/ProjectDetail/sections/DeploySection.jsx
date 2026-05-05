@@ -9,10 +9,9 @@ const INFRA_LABELS = {
 export default function DeploySection({ project }) {
   const { deploy } = project.docs
 
-  const infraEntries = Object.entries(INFRA_LABELS).map(([key, label]) => ({
-    label,
-    value: deploy[key],
-  }))
+  const infraEntries = deploy.services
+    ? deploy.services.map((s) => ({ label: s.label, value: s.platform, badge: s.type }))
+    : Object.entries(INFRA_LABELS).map(([key, label]) => ({ label, value: deploy[key] }))
 
   const total = deploy.costs.reduce((sum, row) => {
     const num = parseFloat(row.value.replace("$", "")) || 0
@@ -30,6 +29,9 @@ export default function DeploySection({ project }) {
             <div key={item.label} className="docs-deploy-card">
               <span className="docs-deploy-card-label">{item.label}</span>
               <span className="docs-deploy-card-value">{item.value}</span>
+              {item.badge && (
+                <span className="docs-arch-adr-badge">{item.badge}</span>
+              )}
             </div>
           ))}
         </div>
@@ -57,13 +59,21 @@ export default function DeploySection({ project }) {
           </div>
         </div>
 
-        <p className="docs-deploy-note">
-          El proyecto completo corre en free tiers excepto Railway Hobby
-          ($5/mes para el backend + PostgreSQL).
-        </p>
-        <p className="docs-deploy-note">
-          * Dominio nicoleroldan.com: $40.000 COP/año (~$2 USD/mes prorrateado)
-        </p>
+        {deploy.notes ? (
+          deploy.notes.map((note) => (
+            <p key={note} className="docs-deploy-note">{note}</p>
+          ))
+        ) : (
+          <>
+            <p className="docs-deploy-note">
+              El proyecto completo corre en free tiers excepto Railway Hobby
+              ($5/mes para el backend + PostgreSQL).
+            </p>
+            <p className="docs-deploy-note">
+              * Dominio nicoleroldan.com: $40.000 COP/año (~$2 USD/mes prorrateado)
+            </p>
+          </>
+        )}
       </div>
 
     </div>
