@@ -7,13 +7,13 @@ const INFRA_LABELS = {
 }
 
 export default function DeploySection({ project }) {
-  const { deploy } = project.docs
+  const deploy = project.docs?.deploy ?? {}
 
   const infraEntries = deploy.services
     ? deploy.services.map((s) => ({ label: s.label, value: s.platform, badge: s.type }))
     : Object.entries(INFRA_LABELS).map(([key, label]) => ({ label, value: deploy[key] }))
 
-  const total = deploy.costs.reduce((sum, row) => {
+  const total = (deploy.costs ?? []).reduce((sum, row) => {
     const num = parseFloat(row.value.replace("$", "")) || 0
     return sum + num
   }, 0)
@@ -41,7 +41,7 @@ export default function DeploySection({ project }) {
       <div>
         <h2 className="docs-overview-section-title">Costos mensuales</h2>
         <div className="docs-deploy-costs">
-          {deploy.costs.map((row) => (
+          {(deploy.costs ?? []).map((row) => (
             <div key={row.service} className="docs-deploy-cost-row">
               <div className="docs-deploy-cost-left">
                 <span className="docs-deploy-cost-service">{row.service}</span>

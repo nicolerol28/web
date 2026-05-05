@@ -55,7 +55,7 @@ export default function OverviewSection({ project }) {
 
       {/* 2. STATS */}
       <div className="docs-overview-stats">
-        {docs.stats.map((stat) => (
+        {(docs.stats ?? []).map((stat) => (
           <div key={stat.label} className="docs-overview-stat-card">
             <span className="docs-overview-stat-label">{stat.label}</span>
             <span className="docs-overview-stat-value">{stat.value}</span>
@@ -68,7 +68,7 @@ export default function OverviewSection({ project }) {
         <h2 className="docs-overview-section-title">Stack</h2>
 
         <div className="docs-overview-tag-rows">
-          {Object.entries(docs.tags).map(([category, tags]) => (
+          {Object.entries(docs.tags ?? {}).map(([category, tags]) => (
             <div key={category} className="docs-overview-tag-row">
               <span className="docs-overview-tag-category">
                 {CATEGORY_LABELS[category]}
@@ -120,7 +120,7 @@ export default function OverviewSection({ project }) {
           <div style={{ marginTop: "2rem" }}>
             <h2 className="docs-overview-section-title">Conexiones</h2>
             <div className="docs-deploy-costs">
-              {docs.architecture.connections.map((conn) => (
+              {(docs.architecture.connections ?? []).map((conn) => (
                 <div key={`${conn.from}-${conn.to}`} className="docs-deploy-cost-row">
                   <span className="docs-deploy-cost-service">{conn.from} → {conn.to}</span>
                   <span className="docs-ai-injection-tag">{conn.label}</span>

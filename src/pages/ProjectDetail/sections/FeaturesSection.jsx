@@ -39,7 +39,10 @@ function FeatureCard({ text }) {
 
 export default function FeaturesSection({ project }) {
   const roles = project.docs.roles ?? ROLES
-  const { groups, ungrouped } = groupFeatures(project.docs.features)
+  const shouldGroup = project.docs.architecture?.type === "ecosystem"
+  const { groups, ungrouped } = shouldGroup
+    ? groupFeatures(project.docs.features)
+    : { groups: new Map(), ungrouped: project.docs.features }
   const hasGroups = groups.size > 0
 
   return (
@@ -125,7 +128,7 @@ export default function FeaturesSection({ project }) {
             </thead>
             <tbody>
               {project.docs.debt.map((item, idx) => (
-                <tr key={idx} className="docs-debt-tr">
+                <tr key={`${item.area}-${idx}`} className="docs-debt-tr">
                   <td className="docs-debt-td docs-debt-td--area">
                     <span className="docs-debt-area-badge">{item.area}</span>
                   </td>

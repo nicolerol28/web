@@ -3,7 +3,15 @@ import { useState } from "react"
 export default function AgentsSection({ project }) {
   const [openIdx, setOpenIdx] = useState(null)
   const toggle = (idx) => setOpenIdx((prev) => (prev === idx ? null : idx))
-  const { agents } = project.docs
+  const agents = project.docs.agents ?? []
+
+  if (agents.length === 0) {
+    return (
+      <div className="docs-ai">
+        <p className="docs-overview-desc">No hay agentes documentados para este proyecto.</p>
+      </div>
+    )
+  }
 
   return (
     <div className="docs-ai">
@@ -69,7 +77,7 @@ export default function AgentsSection({ project }) {
                       <span className="docs-arch-adr-col-label">Flujo de request</span>
                       <div className="docs-ai-flow">
                         {agent.flow.map((step, stepIdx) => (
-                          <div key={stepIdx} className="docs-ai-flow-item">
+                          <div key={step} className="docs-ai-flow-item">
                             {stepIdx > 0 && <div className="docs-ai-flow-line" />}
                             <div className="docs-ai-flow-step">
                               <span className="docs-ai-flow-num">{stepIdx + 1}</span>
