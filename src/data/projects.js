@@ -3,8 +3,8 @@ export const projects = [
     id: "inventory-system",
     slug: "inventory-system",
     title: "Inventory System",
-    description: "Sistema de gestión de inventario full stack construido con Clean Architecture y CQRS. Incluye IA integrada con Gemini 2.5 Flash para insights automáticos, asistente de chat contextual, autenticación JWT + Google OAuth 2.0, imágenes en Cloudflare R2 y reset nocturno de datos demo. Nota: el demo puede no estar disponible ya que los servicios se escalan a cero para optimizar costos de hosting.",
-    tags: ["Java 17", "Spring Boot 3.5", "React 19", "PostgreSQL", "Docker", "Gemini AI", "Cloudflare R2", "Railway", "Vercel"],
+    description: "Sistema de gestión de inventario full stack construido con Clean Architecture y CQRS. Incluye IA integrada con Gemini 2.5 Flash para insights automáticos, asistente de chat contextual, autenticación JWT + Google OAuth 2.0, imágenes en Cloudflare R2 y reset nocturno de datos demo.",
+    tags: ["Java 17", "Spring Boot 3.5", "React 19", "PostgreSQL", "Docker", "Gemini AI", "Cloudflare R2", "Self-hosted", "Vercel"],
     demo: "https://inventory.nicoleroldan.com",
     backend: "https://github.com/nicolerol28/inventory-system-backend",
     frontend: "https://github.com/nicolerol28/inventory-system-frontend",
@@ -18,7 +18,7 @@ export const projects = [
       tags: {
         backend: ["Java 17", "Spring Boot 3.5", "Clean Architecture", "CQRS", "JWT", "OAuth 2.0", "Flyway", "PostgreSQL", "SpringDoc OpenAPI"],
         frontend: ["React 19", "Vite", "Tailwind CSS v4", "TanStack Query", "React Router", "Recharts"],
-        infra: ["Docker", "Railway", "Vercel", "Cloudflare R2", "Gemini 2.5 Flash"],
+        infra: ["Docker", "Self-hosted", "Vercel", "Cloudflare R2", "Gemini 2.5 Flash"],
       },
       features: [
         "Dashboard con KPIs en tiempo real e insights de IA",
@@ -54,13 +54,13 @@ export const projects = [
           response: "9 – 406",
           total: "3.582 – 5.166",
           avgTotal: "~4.300",
-          note: "El contexto SQL representa ~85–99% de los tokens por request. Muestras reales desde Railway logs.",
+          note: "El contexto SQL representa ~85–99% de los tokens por request. Muestras reales desde los logs del servidor.",
         },
         latency: {
           min: "1s",
           max: "11s",
           avg: "~6-8s",
-          note: "Incluye construcción del contexto SQL + llamada a Gemini API. Cold starts en Railway pueden agregar latencia adicional.",
+          note: "Incluye construcción del contexto SQL + llamada a Gemini API.",
         },
         injectionPatternsList: [
           "ignore previous",
@@ -214,7 +214,7 @@ export const projects = [
           title: "Monolito modular vs microservicios",
           badge: "Arquitectura",
           context: "Límites de módulos claros (productos, inventario, proveedores, usuarios, asistente) pero un solo target de despliegue.",
-          decision: "Monolito modular. Los módulos se comunican por interfaces de servicio, no por HTTP. Un solo despliegue en Railway. Una sola base de datos PostgreSQL.",
+          decision: "Monolito modular. Los módulos se comunican por interfaces de servicio, no por HTTP. Un solo despliegue en el servidor. Una sola base de datos PostgreSQL.",
           tradeoffs: "Microservicios demostrarían skills de Kubernetes. El monolito modular demuestra que la elección entre ambos es un trade-off deliberado, correcto a esta escala.",
         },
       ],
@@ -225,13 +225,13 @@ export const projects = [
         { area: "Auth", issue: "LoginUseCase depende de AuthenticationManager de Spring Security — dependencia de framework en capa de aplicación", severity: "medio" },
       ],
       deploy: {
-        backend: "Railway",
+        backend: "Self-hosted (Ubuntu Server 22.04 + Docker)",
         frontend: "Vercel",
-        db: "PostgreSQL en Railway",
+        db: "PostgreSQL en servidor propio",
         storage: "Cloudflare R2",
         domain: "Cloudflare DNS → nicoleroldan.com",
         costs: [
-          { service: "Railway (backend + DB)", tier: "Hobby $5/mes", value: "$5" },
+          { service: "Self-hosted (backend + DB)", tier: "Ubuntu Server 22.04 + Docker", value: "$0" },
           { service: "Vercel (frontend)",      tier: "Free tier",    value: "$0" },
           { service: "Cloudflare R2",          tier: "Free tier",    value: "$0" },
           { service: "Cloudflare DNS",         tier: "Free",         value: "$0" },
@@ -267,7 +267,7 @@ export const projects = [
       tags: {
         backend: ["Node.js 22", "TypeScript 5", "Mastra 1.24.1", "Hono", "Gemini 2.5 Flash", "Gemini Embedding 001", "pgvector + HNSW", "Zod", "PostgreSQL"],
         frontend: ["React 19", "Vite 8", "Tailwind CSS 4", "JavaScript", "SSE Streaming", "grammY 1.42"],
-        infra: ["Railway", "Vercel", "MCP stdio + HTTP Streaming", "A2A JSON-RPC 2.0", "JWT HS256 / HS512"],
+        infra: ["Self-hosted", "Vercel", "MCP stdio + HTTP Streaming", "A2A JSON-RPC 2.0", "JWT HS256 / HS512"],
       },
     
       features: [
@@ -373,7 +373,7 @@ export const projects = [
           title: "pgvector + HNSW sin vector DB dedicada",
           badge: "Costo",
           context: "El RAG necesita búsqueda por similaridad sobre embeddings de productos.",
-          decision: "pgvector con índice HNSW sobre la misma PostgreSQL de Railway. Sin Pinecone, Weaviate ni Qdrant.",
+          decision: "pgvector con índice HNSW sobre la misma PostgreSQL del servidor. Sin Pinecone, Weaviate ni Qdrant.",
           tradeoffs: "Una vector DB dedicada escala mejor. pgvector cubre el caso de uso a costo $0 adicional reusando la infra existente.",
         },
         {
@@ -468,22 +468,22 @@ export const projects = [
     
       deploy: {
         services: [
-          { label: "ai-service", platform: "Railway"},
-          { label: "reports-agent", platform: "Railway" },
+          { label: "ai-service", platform: "Self-hosted"},
+          { label: "reports-agent", platform: "Self-hosted" },
           { label: "ai-chat", platform: "Vercel"},
           { label: "reports-ui", platform: "Vercel" },
-          { label: "bot", platform: "Railway (Dockerfile)"},
-          { label: "PostgreSQL + pgvector", platform: "Railway"},
+          { label: "bot", platform: "Self-hosted (Dockerfile)"},
+          { label: "PostgreSQL + pgvector", platform: "Self-hosted"},
         ],
         costs: [
-          { service: "Railway (3 servicios + DB)", tier: "Hobby $5/mes", value: "$5" },
+          { service: "Self-hosted (3 servicios + DB)", tier: "Ubuntu Server 22.04 + Docker", value: "$0" },
           { service: "Vercel (2 frontends)", tier: "Free tier", value: "$0" },
           { service: "Gemini 2.5 Flash + Embedding 001", tier: "Free tier", value: "$0" },
           { service: "Cloudflare DNS", tier: "Free tier", value: "$0" },
         ],
         notes: [
-          "El bot es el único servicio con Dockerfile — los demás usan el builder automático de Railway.",
-          "pgvector corre en la misma PostgreSQL de Railway sin infraestructura vectorial adicional.",
+          "Todos los servicios corren en el servidor con Docker.",
+          "pgvector corre en la misma PostgreSQL del servidor sin infraestructura vectorial adicional.",
           "Los costos de dominio están compartidos con el Inventory System.",
         ],
       },

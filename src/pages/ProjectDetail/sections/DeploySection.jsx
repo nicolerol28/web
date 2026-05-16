@@ -66,8 +66,8 @@ export default function DeploySection({ project }) {
         ) : (
           <>
             <p className="docs-deploy-note">
-              El proyecto completo corre en free tiers excepto Railway Hobby
-              ($5/mes para el backend + PostgreSQL).
+              El proyecto completo corre en self-hosted (Ubuntu Server 22.04 + Docker)
+              para el backend y PostgreSQL, y Vercel para el frontend.
             </p>
             <p className="docs-deploy-note">
               * Dominio nicoleroldan.com: $40.000 COP/año (~$2 USD/mes prorrateado)

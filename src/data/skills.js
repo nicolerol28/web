@@ -17,7 +17,7 @@ export const skills = {
 
   devops: [
     { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" },
-    { name: "Railway", icon: "https://cdn.simpleicons.org/railway/60a5fa" },
+    { name: "Ubuntu Server", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ubuntu/ubuntu-original.svg" },
     { name: "Vercel", icon: "https://cdn.simpleicons.org/vercel/60a5fa" },
     { name: "Cloudflare", icon: "https://cdn.simpleicons.org/cloudflare/60a5fa" },
     { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" },

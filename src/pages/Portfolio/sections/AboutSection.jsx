@@ -35,7 +35,7 @@ export default function AboutSection() {
           <p>
             Tengo experiencia en Clean Architecture, CQRS, autenticación JWT, almacenamiento 
             en la nube con Cloudflare R2, streaming en tiempo real, evaluaciones automatizadas 
-            de agentes, y despliegue en producción con Railway y Vercel. Actualmente curso 
+            de agentes, y despliegue en producción con Ubuntu Server 22.04, Docker y Vercel. Actualmente curso
             Tecnología en Desarrollo de Software en la Universidad del Valle y estoy disponible 
             para posiciones junior o proyectos freelance.
           </p>
