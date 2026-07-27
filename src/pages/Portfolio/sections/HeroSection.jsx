@@ -1,5 +1,6 @@
 import { GitHubIcon, LinkedInIcon } from "../../../components/icons/index"
 import SocialButton from "../../../components/ui/SocialButton"
+import TextType from "../../../components/TextType/TextType"
 import contacts from "../../../data/contacts"
 
 export default function HeroSection({ onScrollTo }) {
@@ -9,7 +10,16 @@ export default function HeroSection({ onScrollTo }) {
         <div>
           <p className="hero-greeting">
             <span className="hero-line" />
-            Hola, bienvenido
+            <TextType
+              className="hero-greeting-text"
+              text={["Hola, bienvenido", "Explora mi portafolio", "Construyamos algo increíble"]}
+              typingSpeed={75}
+              pauseDuration={1500}
+              deletingSpeed={50}
+              showCursor
+              cursorCharacter="_"
+              loop
+            />
           </p>
           <h1 className="hero-name">Nicole<br /><span className="gradient">Roldan</span></h1>
           <p className="hero-role">Full Stack Developer · AI Integration</p>
