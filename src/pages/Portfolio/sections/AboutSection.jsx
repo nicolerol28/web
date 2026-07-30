@@ -1,4 +1,5 @@
 import SectionHeader from "../../../components/ui/SectionHeader"
+import TiltedCard from "../../../components/TiltedCard/TiltedCard"
 
 const facts = [
   "Tec. Desarrollo de Software – Univalle",
@@ -11,11 +12,17 @@ export default function AboutSection() {
       <SectionHeader badge="Sobre mí" title="¿Quién soy?" />
       <div className="about-grid">
         <div className="about-photo">
-          <img
-            src="/images/sobremi.jpeg"
-            alt="Nicole Roldan"
-            className="about-photo-img"
-
+          <TiltedCard
+            imageSrc="/images/sobremi.jpeg"
+            altText="Nicole Roldan"
+            containerHeight="380px"
+            containerWidth="300px"
+            imageHeight="380px"
+            imageWidth="300px"
+            rotateAmplitude={12}
+            scaleOnHover={1.05}
+            showMobileWarning={false}
+            showTooltip={false}
           />
         </div>
         <div className="about-body">

@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from "react"
 import { navLinks } from "../../data/navigation"
 import { MenuIcon } from "../icons/index"
+import "../DownloadButton/DownloadButton.css"
 
 const CV_OPTIONS = [
-  { label: "📄 Español", href: "/CV-NicoleRoldan-ES.pdf" },
-  { label: "📄 English", href: "/CV-NicoleRoldan-EN.pdf" },
+  { label: "Español", href: "/CV-NicoleRoldan-ES.pdf" },
+  { label: "English", href: "/CV-NicoleRoldan-EN.pdf" },
 ]
 
 function CvDropdown() {
@@ -21,8 +22,15 @@ function CvDropdown() {
 
   return (
     <div ref={ref} className="cv-dropdown">
-      <button className="nr-btn-cv" onClick={() => setOpen(o => !o)}>
-        Descargar CV ▾
+      <button className="download-button" onClick={() => setOpen(o => !o)}>
+        <span className="download-button-wrapper">
+          <span className="download-button-text">Descargar CV</span>
+          <span className="download-button-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+            </svg>
+          </span>
+        </span>
       </button>
       {open && (
         <div className="cv-dropdown-menu">
