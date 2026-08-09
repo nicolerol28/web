@@ -1,3 +1,5 @@
+import DevelopmentNotice from "../components/DevelopmentNotice"
+
 const ROLES = [
   {
     role: "ADMIN",
@@ -45,6 +47,10 @@ export default function FeaturesSection({ project }) {
 
   return (
     <div className="docs-features">
+
+      {project.inDevelopment && (
+        <DevelopmentNotice text="El listado de funcionalidades se está ampliando: la documentación completa se publicará próximamente." />
+      )}
 
       {/* 1. FEATURES GRID */}
       <div>

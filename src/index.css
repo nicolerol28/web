@@ -604,6 +604,38 @@
      margin: 0;
    }
 
+   .docs-dev-notice {
+     display: flex;
+     align-items: center;
+     gap: 0.75rem;
+     flex-wrap: wrap;
+     padding: 0.9rem 1.1rem;
+     border-radius: var(--radius-md);
+     background: rgba(234,179,8,0.08);
+     border: 1px solid rgba(234,179,8,0.25);
+     margin-bottom: 1.5rem;
+   }
+
+   .docs-dev-notice-badge {
+     padding: 0.15rem 0.6rem;
+     border-radius: var(--radius-sm);
+     font-size: 0.7rem;
+     font-weight: 700;
+     text-transform: uppercase;
+     letter-spacing: 0.04em;
+     background: rgba(234,179,8,0.15);
+     border: 1px solid rgba(234,179,8,0.35);
+     color: #fbbf24;
+     white-space: nowrap;
+   }
+
+   .docs-dev-notice-text {
+     margin: 0;
+     font-size: 0.85rem;
+     color: var(--color-text-muted);
+     line-height: 1.6;
+   }
+
    .docs-overview-links {
      display: flex;
      flex-wrap: wrap;

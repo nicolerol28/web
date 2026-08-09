@@ -90,6 +90,10 @@ export default function OverviewSection({ project }) {
       {screenshots.length > 0 ? (
         <div className="docs-overview-screenshots">
           <h2 className="docs-overview-section-title">Screenshots</h2>
+          <p className="docs-overview-desc">
+            Estas capturas son un resumen visual del sistema y su funcionamiento, no cubren
+            la totalidad de las funcionalidades desarrolladas.
+          </p>
 
           <div className="docs-screenshots-grid">
             {screenshots.map((img) => (

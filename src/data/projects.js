@@ -498,4 +498,60 @@ export const projects = [
       ],
     },
   },
+  {
+    id: "digital-repair",
+    slug: "digital-repair",
+    title: "Digital Repair",
+    description: "Aplicación web full-stack para digitalizar la operación de una microempresa de venta y reparación de dispositivos electrónicos con múltiples sedes. Centraliza inventario, órdenes de servicio técnico con bitácora de avances, contabilidad, ventas y coordinación de personal en un solo sistema.",
+    tags: ["Java", "Spring Boot", "Next.js", "React", "TypeScript", "PostgreSQL", "Docker"],
+    demo: null, 
+    inDevelopment: true, // secciones de Arquitectura y Features muestran aviso "En desarrollo"
+
+    docs: {
+      stats: [
+        { label: "Endpoints", value: "48" },
+        { label: "Módulos", value: "13" },
+        { label: "Roles", value: "2" },
+      ],
+      tags: {
+        backend: ["Java", "Spring Boot", "Spring Data JPA", "Spring Security", "PostgreSQL", "Flyway", "Docker"],
+        frontend: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Recharts"],
+        infra: ["Cloudflare R2", "Vercel", "Self-Hosting", "Docker", "Git/GitHub", "Jira"],
+      },
+      features: [
+        "Gestión centralizada de inventario entre dos sedes",
+        "Seguimiento de órdenes de servicio técnico",
+        "Contabilidad de ingresos y egresos",
+        "Coordinación del personal técnico",
+        "Autenticación basada en sesiones y control de acceso por roles",
+        "Reportes con gráficos (Recharts)",
+      ],
+      adrs: [],
+      deploy: {
+        backend: "Self-hosted (Ubuntu Server 22.04 + Docker)",
+        frontend: "Vercel",
+        db: "PostgreSQL en servidor propio",
+        storage: "Cloudflare R2",
+        domain: "Cloudflare DNS → digital-repair-center.com",
+        costs: [
+          { service: "Self-hosted (backend + DB)", tier: "Ubuntu Server 22.04 + Docker", value: "$0" },
+          { service: "Vercel (frontend)", tier: "Free tier", value: "$0" },
+          { service: "Cloudflare R2", tier: "Free tier", value: "$0" },
+          { service: "Cloudflare DNS", tier: "Free", value: "$0" },
+          { service: "Dominio digital-repair-center.com", tier: "Anual ~$2/mes", value: "$2*" },
+        ],
+        notes: [
+          "El proyecto completo corre en self-hosted (Ubuntu Server 22.04 + Docker) para el backend y PostgreSQL, y Vercel para el frontend.",
+          "* Dominio digital-repair-center.com: ~$2 USD/mes prorrateado",
+        ],
+      },
+
+      sections: [
+        { id: "overview",     label: "Overview" },
+        { id: "architecture", label: "Arquitectura" },
+        { id: "features",     label: "Features" },
+        { id: "deploy",       label: "Deploy & Costos" },
+      ],
+    },
+  },
 ];

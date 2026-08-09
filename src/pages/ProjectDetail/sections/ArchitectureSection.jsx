@@ -1,5 +1,6 @@
 import { useState } from "react"
 import AdrCard from "../components/AdrCard"
+import DevelopmentNotice from "../components/DevelopmentNotice"
 
 /* ── Ecosystem diagram helpers ─────────────────────────────── */
 
@@ -212,14 +213,20 @@ export default function ArchitectureSection({ project }) {
   const [openAdr, setOpenAdr] = useState(null)
   const toggle = (idx) => setOpenAdr((prev) => (prev === idx ? null : idx))
 
-  const arch      = project.docs.architecture
-  const isEco     = arch?.type === "ecosystem"
+  const arch       = project.docs.architecture
+  const isEco      = arch?.type === "ecosystem"
+  const hasLayers  = !!arch && (Array.isArray(arch.interfaces) || Array.isArray(arch.services))
+  const adrs       = project.docs.adrs ?? []
 
   return (
     <div className="docs-arch">
 
+      {project.inDevelopment && (
+        <DevelopmentNotice text="La arquitectura del sistema se está documentando: el diagrama y las decisiones técnicas se publicarán próximamente." />
+      )}
+
       {/* 1. DIAGRAM */}
-      {isEco ? (
+      {hasLayers && (isEco ? (
         <div>
           <h2 className="docs-overview-section-title">Ecosystem Architecture</h2>
           <EcosystemDiagram architecture={arch} />
@@ -312,22 +319,24 @@ export default function ArchitectureSection({ project }) {
             )
           })()}
         </div>
-      )}
+      ))}
 
       {/* 2. DECISION RECORDS */}
-      <div>
-        <h2 className="docs-overview-section-title">Architectural decisions</h2>
-        <div className="docs-arch-adrs">
-          {project.docs.adrs.map((adr, idx) => (
-            <AdrCard
-              key={adr.title}
-              adr={adr}
-              isOpen={openAdr === idx}
-              onToggle={() => toggle(idx)}
-            />
-          ))}
+      {adrs.length > 0 && (
+        <div>
+          <h2 className="docs-overview-section-title">Architectural decisions</h2>
+          <div className="docs-arch-adrs">
+            {adrs.map((adr, idx) => (
+              <AdrCard
+                key={adr.title}
+                adr={adr}
+                isOpen={openAdr === idx}
+                onToggle={() => toggle(idx)}
+              />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
     </div>
   )
